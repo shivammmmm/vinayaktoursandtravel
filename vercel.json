@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd frontend && npm install --legacy-peer-deps && NITRO_PRESET=vercel npm run build",
-  "outputDirectory": "frontend/.vercel/output",
+  "buildCommand": "cd frontend && npm install --legacy-peer-deps && NITRO_PRESET=vercel npm run build && mkdir -p ../.vercel/output && cp -r .vercel/output/. ../.vercel/output/",
+  "outputDirectory": ".vercel/output",
   "installCommand": "echo skip",
   "framework": null
 }
