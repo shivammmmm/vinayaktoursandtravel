@@ -1,0 +1,339 @@
+import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { brand, services, themes, regions } from "@/lib/site-data";
+import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/site/Logo";
+
+type NavItem = {
+  to: string;
+  label: string;
+  children?: { to: string; label: string; desc?: string }[];
+};
+
+const nav: NavItem[] = [
+  { to: "/", label: "Home" },
+  {
+    to: "/about",
+    label: "About",
+    children: [
+      { to: "/about", label: "Company Profile", desc: "Our story since 2014" },
+      { to: "/about#leadership", label: "Leadership", desc: "Meet the team" },
+      { to: "/about#offices", label: "Our Offices", desc: "Indore & Chandigarh" },
+    ],
+  },
+  {
+    to: "/services",
+    label: "Services",
+    children: services.map((s) => ({ to: "/services", label: s.title, desc: s.desc })),
+  },
+  {
+    to: "/packages",
+    label: "Packages",
+    children: [
+      { to: "/packages", label: "India", desc: "Domestic escapes" },
+      { to: "/packages", label: "International", desc: "50+ countries" },
+      { to: "/packages", label: "Luxury", desc: "5-star & bespoke" },
+      { to: "/packages", label: "Adventure", desc: "Treks & expeditions" },
+    ],
+  },
+  {
+    to: "/themes",
+    label: "Themes",
+    children: themes.map((t) => ({
+      to: `/booking?destination=${encodeURIComponent(`${t} — India`)}`,
+      label: t,
+    })),
+  },
+  {
+    to: "/destinations",
+    label: "Destinations",
+    children: regions.map((r) => ({
+      to: `/destinations#${r.key}`,
+      label: r.label,
+      desc: `${r.destinations.length} destinations`,
+    })),
+  },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/contact", label: "Contact" },
+];
+
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const [openMobile, setOpenMobile] = useState<string | null>(null);
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+      <div className="container-page flex h-20 items-center gap-4">
+        <Link to="/" className="flex min-w-0 shrink-0 items-center">
+          <Logo className="h-16 w-auto shrink-0" />
+        </Link>
+
+        <nav className="ml-auto hidden items-center gap-1 lg:flex">
+          {nav.map((n) => {
+            const hasChildren = !!n.children?.length;
+            if (!hasChildren) {
+              return (
+                <Link
+                  key={n.label}
+                  to={n.to}
+                  className="rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                  activeProps={{ className: "bg-secondary text-foreground" }}
+                >
+                  {n.label}
+                </Link>
+              );
+            }
+
+            // Mega Menu for Destinations
+            if (n.label === "Destinations") {
+              return (
+                <div key={n.label} className="group relative">
+                  <Link
+                    to={n.to}
+                    className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                    activeProps={{ className: "bg-secondary text-foreground" }}
+                  >
+                    {n.label}
+                    <ChevronDown className="h-3.5 w-3.5 opacity-70 transition group-hover:rotate-180" />
+                  </Link>
+                  <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                    <div className="w-[840px] rounded-3xl border border-border bg-background p-6 shadow-brand">
+                      <div className="grid grid-cols-4 gap-6">
+                        {/* Column 1: Within India */}
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Within India</div>
+                          <ul className="space-y-1">
+                            {regions.find(r => r.key === "india")?.destinations.map(d => (
+                              <li key={d.slug}>
+                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {/* Column 2: Asia */}
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Asia &amp; ME</div>
+                          <ul className="space-y-1">
+                            {regions.find(r => r.key === "asia")?.destinations.slice(0, 8).map(d => (
+                              <li key={d.slug}>
+                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {/* Column 3: Europe & North America */}
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Europe &amp; US</div>
+                          <ul className="space-y-1">
+                            {regions.find(r => r.key === "europe")?.destinations.slice(0, 4).map(d => (
+                              <li key={d.slug}>
+                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                              </li>
+                            ))}
+                            {regions.find(r => r.key === "north-america")?.destinations.slice(0, 3).map(d => (
+                              <li key={d.slug}>
+                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {/* Column 4: Exotic Gems */}
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Exotic Gems</div>
+                          <ul className="space-y-1">
+                            {regions.find(r => r.key === "africa")?.destinations.slice(0, 3).map(d => (
+                              <li key={d.slug}>
+                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                              </li>
+                            ))}
+                            {regions.find(r => r.key === "oceania")?.destinations.map(d => (
+                              <li key={d.slug}>
+                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-border/50 text-center">
+                        <Link to="/destinations" className="inline-flex items-center text-xs font-bold text-primary hover:text-accent hover:underline">
+                          View All Destinations &rarr;
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            // Mega Menu for Themes
+            if (n.label === "Themes") {
+              const column1 = themes.slice(0, 5);
+              const column2 = themes.slice(5, 9);
+              const column3 = themes.slice(9);
+              return (
+                <div key={n.label} className="group relative">
+                  <Link
+                    to={n.to}
+                    className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                    activeProps={{ className: "bg-secondary text-foreground" }}
+                  >
+                    {n.label}
+                    <ChevronDown className="h-3.5 w-3.5 opacity-70 transition group-hover:rotate-180" />
+                  </Link>
+                  <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                    <div className="w-[600px] rounded-3xl border border-border bg-background p-6 shadow-brand">
+                      <div className="grid grid-cols-3 gap-6">
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Leisure &amp; Romance</div>
+                          <ul className="space-y-1">
+                            {column1.map(t => (
+                              <li key={t}>
+                                <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{t}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Nature &amp; Wild</div>
+                          <ul className="space-y-1">
+                            {column2.map(t => (
+                              <li key={t}>
+                                <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{t}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Spiritual &amp; Group</div>
+                          <ul className="space-y-1">
+                            {column3.map(t => (
+                              <li key={t}>
+                                <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{t}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            const wide = n.children!.length > 8;
+            return (
+              <div key={n.label} className="group relative">
+                <Link
+                  to={n.to}
+                  className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                  activeProps={{ className: "bg-secondary text-foreground" }}
+                >
+                  {n.label}
+                  <ChevronDown className="h-3.5 w-3.5 opacity-70 transition group-hover:rotate-180" />
+                </Link>
+                <div
+                  className={`invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100`}
+                >
+                  <div
+                    className={`rounded-2xl border border-border bg-background p-3 shadow-brand ${wide ? "w-[560px]" : "w-72"}`}
+                  >
+                    <ul className={`grid gap-1 ${wide ? "grid-cols-2" : "grid-cols-1"}`}>
+                      {n.children!.map((c) => (
+                        <li key={c.label}>
+                          <a
+                            href={c.to}
+                            className="block rounded-lg px-3 py-2 text-sm hover:bg-secondary"
+                          >
+                            <div className="font-semibold text-foreground">{c.label}</div>
+                            {c.desc && <div className="text-xs text-muted-foreground">{c.desc}</div>}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-2 lg:ml-4">
+          <a
+            href={`tel:${brand.phones[1].tel}`}
+            className="hidden items-center gap-2 rounded-full border border-border px-3 py-2 text-sm font-medium text-foreground hover:bg-secondary md:inline-flex"
+          >
+            <Phone className="h-4 w-4 text-accent" />
+            {brand.phones[1].number}
+          </a>
+          <Button asChild size="sm" className="hidden bg-accent text-accent-foreground hover:bg-accent/90 md:inline-flex">
+            <Link to="/booking">Plan My Trip</Link>
+          </Button>
+          <button
+            aria-label="Toggle menu"
+            className="rounded-md p-2 hover:bg-secondary lg:hidden"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="border-t border-border bg-background lg:hidden">
+          <div className="container-page flex flex-col py-3">
+            {nav.map((n) => {
+              const hasChildren = !!n.children?.length;
+              const isOpen = openMobile === n.label;
+              return (
+                <div key={n.label} className="border-b border-border/50 last:border-b-0">
+                  <div className="flex items-center">
+                    <Link
+                      to={n.to}
+                      onClick={() => setOpen(false)}
+                      className="flex-1 rounded-md px-3 py-3 text-base font-medium hover:bg-secondary"
+                    >
+                      {n.label}
+                    </Link>
+                    {hasChildren && (
+                      <button
+                        aria-label={`Toggle ${n.label} submenu`}
+                        onClick={() => setOpenMobile(isOpen ? null : n.label)}
+                        className="rounded-md p-3 hover:bg-secondary"
+                      >
+                        <ChevronDown className={`h-4 w-4 transition ${isOpen ? "rotate-180" : ""}`} />
+                      </button>
+                    )}
+                  </div>
+                  {hasChildren && isOpen && (
+                    <ul className="pb-2 pl-4">
+                      {n.children!.map((c) => (
+                        <li key={c.label}>
+                          <a
+                            href={c.to}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-md px-3 py-2 text-sm text-foreground/80 hover:bg-secondary"
+                          >
+                            {c.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+            <Link
+              to="/booking"
+              onClick={() => setOpen(false)}
+              className="mt-3 rounded-md bg-accent px-3 py-3 text-center text-base font-semibold text-accent-foreground"
+            >
+              Plan My Trip
+            </Link>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
