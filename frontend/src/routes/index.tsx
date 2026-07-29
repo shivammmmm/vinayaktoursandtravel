@@ -124,9 +124,9 @@ function Home() {
           </div>
         ))}
 
-        {/* Soft Gradient Overlay so background slides are bright and clearly visible */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/80 via-primary/45 to-black/25" aria-hidden />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-primary/70 via-transparent to-black/30" aria-hidden />
+        {/* Soft Neutral Vignette Overlay (No blue tint, natural photo colors with crisp text readability) */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/65 via-black/25 to-transparent" aria-hidden />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-black/20" aria-hidden />
 
         {/* HERO CONTAINER CONTENT */}
         <div className="container-page py-16 text-primary-foreground md:py-24 relative z-10">

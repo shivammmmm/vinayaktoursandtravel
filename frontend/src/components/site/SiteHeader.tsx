@@ -84,7 +84,7 @@ export function SiteHeader() {
         <div className="container-page flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-[11px] font-medium opacity-90">
             <span className="inline-flex items-center gap-1.5 font-bold">
-              <Sparkles className="h-3 w-3 text-accent" /> Est. {brand.established} — Indore &amp; Chandigarh
+              Est. {brand.established} — Indore &amp; Chandigarh
             </span>
             <span className="hidden md:inline">• 10+ Years Trust • 50+ Countries</span>
           </div>
@@ -365,48 +365,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 lg:ml-4">
-          {/* Helpline Widget with Dropdown for both offices */}
-          <div className="relative group hidden md:block">
-            <a
-              href={`tel:${brand.phones[0].tel}`}
-              className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-secondary/80 px-3.5 py-1.5 text-xs font-bold text-foreground hover:bg-secondary hover:border-accent/50 transition-all shadow-2xs"
-            >
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-accent/15 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                <PhoneCall className="h-3.5 w-3.5" />
-              </div>
-              <div className="text-left leading-tight">
-                <div className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Helpline Desk</div>
-                <div className="text-xs font-extrabold text-foreground tracking-tight">{brand.phones[0].number}</div>
-              </div>
-            </a>
-
-            {/* Hover Popover showing both office contacts */}
-            <div className="invisible absolute right-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100 z-50">
-              <div className="w-60 rounded-2xl border border-border bg-background p-3 shadow-brand space-y-2">
-                <div className="text-[10px] font-extrabold uppercase tracking-widest text-accent px-1">Direct Travel Desks</div>
-                <a
-                  href={`tel:${brand.phones[0].tel}`}
-                  className="flex items-center justify-between rounded-xl p-2.5 hover:bg-secondary transition-colors border border-transparent hover:border-border"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-foreground">Indore Head Office</div>
-                    <div className="text-[11px] font-medium text-muted-foreground">{brand.phones[0].number}</div>
-                  </div>
-                  <PhoneCall className="h-3.5 w-3.5 text-accent shrink-0" />
-                </a>
-                <a
-                  href={`tel:${brand.phones[1].tel}`}
-                  className="flex items-center justify-between rounded-xl p-2.5 hover:bg-secondary transition-colors border border-transparent hover:border-border"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-foreground">Chandigarh Branch</div>
-                    <div className="text-[11px] font-medium text-muted-foreground">{brand.phones[1].number}</div>
-                  </div>
-                  <PhoneCall className="h-3.5 w-3.5 text-accent shrink-0" />
-                </a>
-              </div>
-            </div>
-          </div>
           <Button asChild size="sm" className="hidden bg-accent text-accent-foreground hover:bg-accent/90 md:inline-flex font-extrabold shadow-sm">
             <Link to="/booking" className="flex items-center gap-1">
               <Sparkles className="h-3.5 w-3.5" />
