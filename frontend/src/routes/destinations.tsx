@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { regions } from "@/lib/site-data";
@@ -18,6 +19,21 @@ export const Route = createFileRoute("/destinations")({
 });
 
 function Destinations() {
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+        }
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <div>
       <PageHero
@@ -28,7 +44,7 @@ function Destinations() {
       <Section>
         <div className="space-y-16">
           {regions.map((r) => (
-            <div key={r.key} id={r.key}>
+            <div key={r.key} id={r.key} className="scroll-mt-24">
               <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
                 <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">{r.label}</h2>
                 <span className="text-sm text-muted-foreground">{r.destinations.length} destinations</span>

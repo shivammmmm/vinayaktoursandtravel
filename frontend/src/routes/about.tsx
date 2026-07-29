@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { brand, officePhotos } from "@/lib/site-data";
-import { Building2, Users2, Award, Globe2 } from "lucide-react";
+import { Building2, Users2, Award, Globe2, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -20,6 +21,21 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+        }
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <div>
       <PageHero
@@ -29,30 +45,32 @@ function About() {
         image={officePhotos.building}
       />
 
-      <Section eyebrow="Our story" title="From a two-desk office to thousands of trips">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-4 text-base leading-relaxed text-foreground/85">
-            <p>
-              Vinayak Tours &amp; Travel was founded in 2014 with a simple belief: a great trip
-              is one where every moving part — flight, transfer, hotel, guide, sim card — is quietly
-              handled so the traveller can just enjoy. Over ten years we've grown from a single desk
-              in Indore into a two-city operation with a dedicated team, corporate contracts and
-              travellers on every continent.
-            </p>
-            <p>
-              We're a full-service travel group covering ticketing, tours and corporate travel. Our
-              partnerships with leading airlines and hotel groups let us offer preferred rates and
-              real flexibility — whether you're chasing the Northern Lights, planning a corporate
-              offsite for 200, or arranging a Char Dham Yatra for your family.
-            </p>
+      <div id="profile" className="scroll-mt-24">
+        <Section eyebrow="Our story" title="From a two-desk office to thousands of trips">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div className="space-y-4 text-base leading-relaxed text-foreground/85">
+              <p>
+                Vinayak Tours &amp; Travel was founded in 2014 with a simple belief: a great trip
+                is one where every moving part — flight, transfer, hotel, guide, sim card — is quietly
+                handled so the traveller can just enjoy. Over ten years we've grown from a single desk
+                in Indore into a two-city operation with a dedicated team, corporate contracts and
+                travellers on every continent.
+              </p>
+              <p>
+                We're a full-service travel group covering ticketing, tours and corporate travel. Our
+                partnerships with leading airlines and hotel groups let us offer preferred rates and
+                real flexibility — whether you're chasing the Northern Lights, planning a corporate
+                offsite for 200, or arranging a Char Dham Yatra for your family.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <img src={officePhotos.exterior} alt="Our office building" className="col-span-2 h-64 w-full rounded-2xl object-cover shadow-card" />
+              <img src={officePhotos.lounge} alt="Reception lounge" className="h-40 w-full rounded-2xl object-cover shadow-card" />
+              <img src={officePhotos.workstations} alt="Workstations" className="h-40 w-full rounded-2xl object-cover shadow-card" />
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <img src={officePhotos.exterior} alt="Our office building" className="col-span-2 h-64 w-full rounded-2xl object-cover shadow-card" />
-            <img src={officePhotos.lounge} alt="Reception lounge" className="h-40 w-full rounded-2xl object-cover shadow-card" />
-            <img src={officePhotos.workstations} alt="Workstations" className="h-40 w-full rounded-2xl object-cover shadow-card" />
-          </div>
-        </div>
-      </Section>
+        </Section>
+      </div>
 
       <Section eyebrow="Group of Companies" title="One travel group, every service you need">
         <p className="max-w-3xl text-lg text-muted-foreground">
@@ -73,7 +91,7 @@ function About() {
         </div>
       </Section>
 
-      <div className="bg-secondary/50">
+      <div id="leadership" className="scroll-mt-24 bg-secondary/50">
         <Section eyebrow="Leadership" title="Meet the people behind your itinerary">
           <div className="grid gap-6 md:grid-cols-2">
             {[
@@ -91,6 +109,27 @@ function About() {
                     {p.phone}
                   </a>
                 </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      </div>
+
+      <div id="offices" className="scroll-mt-24">
+        <Section eyebrow="Locations" title="Our Offices in Indore & Chandigarh">
+          <div className="grid gap-6 md:grid-cols-2">
+            {brand.offices.map((office: { city: string; address: string; contact: string }) => (
+              <div key={office.city} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent/15 text-accent">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold">{office.city}</h3>
+                    <p className="text-xs text-muted-foreground">{office.contact}</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm text-foreground/85 leading-relaxed">{office.address}</p>
               </div>
             ))}
           </div>

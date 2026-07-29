@@ -1,14 +1,22 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Sparkles } from "lucide-react";
 import { brand, services, themes, regions } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/Logo";
 
+type NavChild = {
+  to: string;
+  hash?: string;
+  search?: Record<string, string>;
+  label: string;
+  desc?: string;
+};
+
 type NavItem = {
   to: string;
   label: string;
-  children?: { to: string; label: string; desc?: string }[];
+  children?: NavChild[];
 };
 
 const nav: NavItem[] = [
@@ -17,31 +25,37 @@ const nav: NavItem[] = [
     to: "/about",
     label: "About",
     children: [
-      { to: "/about", label: "Company Profile", desc: "Our story since 2014" },
-      { to: "/about#leadership", label: "Leadership", desc: "Meet the team" },
-      { to: "/about#offices", label: "Our Offices", desc: "Indore & Chandigarh" },
+      { to: "/about", hash: "profile", label: "Company Profile", desc: "Our story since 2014" },
+      { to: "/about", hash: "leadership", label: "Leadership", desc: "Meet the team" },
+      { to: "/about", hash: "offices", label: "Our Offices", desc: "Indore & Chandigarh" },
     ],
   },
   {
     to: "/services",
     label: "Services",
-    children: services.map((s) => ({ to: "/services", label: s.title, desc: s.desc })),
+    children: services.map((s) => ({
+      to: "/services",
+      hash: s.slug,
+      label: s.title,
+      desc: s.desc,
+    })),
   },
   {
     to: "/packages",
     label: "Packages",
     children: [
-      { to: "/packages", label: "India", desc: "Domestic escapes" },
-      { to: "/packages", label: "International", desc: "50+ countries" },
-      { to: "/packages", label: "Luxury", desc: "5-star & bespoke" },
-      { to: "/packages", label: "Adventure", desc: "Treks & expeditions" },
+      { to: "/packages", search: { category: "india" }, label: "India", desc: "Domestic escapes" },
+      { to: "/packages", search: { category: "international" }, label: "International", desc: "50+ countries" },
+      { to: "/packages", search: { category: "luxury" }, label: "Luxury", desc: "5-star & bespoke" },
+      { to: "/packages", search: { category: "adventure" }, label: "Adventure", desc: "Treks & expeditions" },
     ],
   },
   {
     to: "/themes",
     label: "Themes",
     children: themes.map((t) => ({
-      to: `/booking?destination=${encodeURIComponent(`${t} — India`)}`,
+      to: "/booking",
+      search: { destination: `${t} Package` },
       label: t,
     })),
   },
@@ -49,7 +63,8 @@ const nav: NavItem[] = [
     to: "/destinations",
     label: "Destinations",
     children: regions.map((r) => ({
-      to: `/destinations#${r.key}`,
+      to: "/destinations",
+      hash: r.key,
       label: r.label,
       desc: `${r.destinations.length} destinations`,
     })),
@@ -58,13 +73,34 @@ const nav: NavItem[] = [
   { to: "/contact", label: "Contact" },
 ];
 
-
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [openMobile, setOpenMobile] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur-xl">
+      {/* Top Announcement Bar */}
+      <div className="hidden bg-primary text-primary-foreground py-1.5 text-xs border-b border-white/10 sm:block">
+        <div className="container-page flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 text-[11px] font-medium opacity-90">
+            <span className="inline-flex items-center gap-1.5">
+              <Sparkles className="h-3 w-3 text-accent" /> Est. {brand.established} — Indore &amp; Chandigarh
+            </span>
+            <span className="hidden md:inline">• 10+ Years Trust • 50+ Countries</span>
+          </div>
+          <div className="flex items-center gap-4 text-[11px] font-semibold">
+            <a href={`tel:${brand.phones[0].tel}`} className="hover:text-accent transition-colors flex items-center gap-1">
+              <Phone className="h-3 w-3 text-accent" /> Indore: {brand.phones[0].number}
+            </a>
+            <a href={`tel:${brand.phones[1].tel}`} className="hover:text-accent transition-colors hidden lg:flex items-center gap-1">
+              <Phone className="h-3 w-3 text-accent" /> Chandigarh: {brand.phones[1].number}
+            </a>
+            <a href={`https://wa.me/${brand.whatsapp}`} target="_blank" rel="noreferrer" className="bg-accent/20 hover:bg-accent/30 text-accent font-extrabold px-2.5 py-0.5 rounded-md transition-all">
+              WhatsApp 24×7
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="container-page flex h-20 items-center gap-4">
         <Link to="/" className="flex min-w-0 shrink-0 items-center">
           <Logo className="h-16 w-auto shrink-0" />
@@ -105,9 +141,15 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Within India</div>
                           <ul className="space-y-1">
-                            {regions.find(r => r.key === "india")?.destinations.map(d => (
+                            {regions.find((r) => r.key === "india")?.destinations.map((d) => (
                               <li key={d.slug}>
-                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: d.name }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {d.name}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -116,9 +158,15 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Asia &amp; ME</div>
                           <ul className="space-y-1">
-                            {regions.find(r => r.key === "asia")?.destinations.slice(0, 8).map(d => (
+                            {regions.find((r) => r.key === "asia")?.destinations.slice(0, 8).map((d) => (
                               <li key={d.slug}>
-                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: d.name }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {d.name}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -127,14 +175,26 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Europe &amp; US</div>
                           <ul className="space-y-1">
-                            {regions.find(r => r.key === "europe")?.destinations.slice(0, 4).map(d => (
+                            {regions.find((r) => r.key === "europe")?.destinations.slice(0, 4).map((d) => (
                               <li key={d.slug}>
-                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: d.name }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {d.name}
+                                </Link>
                               </li>
                             ))}
-                            {regions.find(r => r.key === "north-america")?.destinations.slice(0, 3).map(d => (
+                            {regions.find((r) => r.key === "north-america")?.destinations.slice(0, 3).map((d) => (
                               <li key={d.slug}>
-                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: d.name }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {d.name}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -143,14 +203,26 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Exotic Gems</div>
                           <ul className="space-y-1">
-                            {regions.find(r => r.key === "africa")?.destinations.slice(0, 3).map(d => (
+                            {regions.find((r) => r.key === "africa")?.destinations.slice(0, 3).map((d) => (
                               <li key={d.slug}>
-                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: d.name }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {d.name}
+                                </Link>
                               </li>
                             ))}
-                            {regions.find(r => r.key === "oceania")?.destinations.map(d => (
+                            {regions.find((r) => r.key === "oceania")?.destinations.map((d) => (
                               <li key={d.slug}>
-                                <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{d.name}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: d.name }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {d.name}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -188,9 +260,15 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Leisure &amp; Romance</div>
                           <ul className="space-y-1">
-                            {column1.map(t => (
+                            {column1.map((t) => (
                               <li key={t}>
-                                <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{t}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: `${t} Package` }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {t}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -198,9 +276,15 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Nature &amp; Wild</div>
                           <ul className="space-y-1">
-                            {column2.map(t => (
+                            {column2.map((t) => (
                               <li key={t}>
-                                <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{t}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: `${t} Package` }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {t}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -208,9 +292,15 @@ export function SiteHeader() {
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Spiritual &amp; Group</div>
                           <ul className="space-y-1">
-                            {column3.map(t => (
+                            {column3.map((t) => (
                               <li key={t}>
-                                <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5">{t}</Link>
+                                <Link
+                                  to="/booking"
+                                  search={{ destination: `${t} Package` }}
+                                  className="text-foreground/70 hover:text-primary hover:pl-1 transition-all text-xs font-semibold block py-0.5"
+                                >
+                                  {t}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -244,6 +334,8 @@ export function SiteHeader() {
                         <li key={c.label}>
                           <Link
                             to={c.to}
+                            hash={c.hash}
+                            search={c.search}
                             className="block rounded-lg px-3 py-2 text-sm hover:bg-secondary"
                           >
                             <div className="font-semibold text-foreground">{c.label}</div>
@@ -310,13 +402,15 @@ export function SiteHeader() {
                     <ul className="pb-2 pl-4">
                       {n.children!.map((c) => (
                         <li key={c.label}>
-                          <a
-                            href={c.to}
+                          <Link
+                            to={c.to}
+                            hash={c.hash}
+                            search={c.search}
                             onClick={() => setOpen(false)}
                             className="block rounded-md px-3 py-2 text-sm text-foreground/80 hover:bg-secondary"
                           >
                             {c.label}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>

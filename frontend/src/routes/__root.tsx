@@ -15,6 +15,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { EnquiryPopup } from "@/components/site/EnquiryPopup";
 import { ChatWidget } from "@/components/site/ChatWidget";
+import { FloatingContactBar } from "@/components/site/FloatingContactBar";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -137,6 +138,7 @@ function RootComponent() {
       </div>
       <EnquiryPopup />
       <ChatWidget />
+      <FloatingContactBar />
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );

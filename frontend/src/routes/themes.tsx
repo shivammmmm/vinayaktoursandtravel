@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { themes } from "@/lib/site-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -58,9 +58,10 @@ function ThemesPage() {
                   const Icon = themeIcons[t] ?? Sparkles;
                   const label = `${t} — ${kind === "domestic" ? "India" : "International"}`;
                   return (
-                    <a
+                    <Link
                       key={t}
-                      href={`/booking?destination=${encodeURIComponent(label)}`}
+                      to="/booking"
+                      search={{ destination: label }}
                       className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition hover:border-accent hover:shadow-card"
                     >
                       <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent">
@@ -75,7 +76,7 @@ function ThemesPage() {
                           Plan this trip →
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   );
                 })}
               </div>

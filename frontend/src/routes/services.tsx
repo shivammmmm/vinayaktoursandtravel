@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { services, airlines, hotelGroups } from "@/lib/site-data";
@@ -25,6 +26,21 @@ export const Route = createFileRoute("/services")({
 });
 
 function Services() {
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+        }
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <div>
       <PageHero
@@ -38,7 +54,11 @@ function Services() {
           {services.map((s) => {
             const Icon = iconMap[s.icon];
             return (
-              <div key={s.title} className="flex gap-5 rounded-2xl border border-border bg-card p-6 shadow-card">
+              <div
+                key={s.slug}
+                id={s.slug}
+                className="scroll-mt-28 flex gap-5 rounded-2xl border border-border bg-card p-6 shadow-card transition-all duration-300 target:border-accent target:ring-2 target:ring-accent/40"
+              >
                 <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl brand-gradient text-white">
                   <Icon className="h-6 w-6" />
                 </div>
@@ -46,7 +66,9 @@ function Services() {
                   <h3 className="text-lg font-bold">{s.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                   <Button asChild variant="link" className="mt-2 h-auto p-0 text-accent">
-                    <Link to="/booking">Enquire <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                    <Link to="/booking" search={{ destination: s.title }}>
+                      Enquire <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
                   </Button>
                 </div>
               </div>

@@ -1,11 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { z } from "zod";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { packages, packageCategories, type PackageCategory } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Check } from "lucide-react";
 
+const packagesSearchSchema = z.object({
+  category: z.string().optional(),
+});
+
 export const Route = createFileRoute("/packages")({
+  validateSearch: (s) => packagesSearchSchema.parse(s),
   head: () => ({
     meta: [
       { title: "Tour Packages — India, International, Luxury & Adventure | Vinayak" },
@@ -21,7 +27,15 @@ export const Route = createFileRoute("/packages")({
 });
 
 function PackagesPage() {
-  const [cat, setCat] = useState<PackageCategory | "all">("all");
+  const search = Route.useSearch();
+  const initialCat = (search.category as PackageCategory) ?? "all";
+  const [cat, setCat] = useState<PackageCategory | "all">(initialCat);
+
+  useEffect(() => {
+    if (search.category && ["india", "international", "luxury", "adventure", "all"].includes(search.category)) {
+      setCat(search.category as PackageCategory | "all");
+    }
+  }, [search.category]);
   const list = useMemo(
     () => (cat === "all" ? packages : packages.filter((p) => p.category.includes(cat))),
     [cat],

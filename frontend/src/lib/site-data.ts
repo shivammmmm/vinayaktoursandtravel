@@ -52,16 +52,17 @@ export const officePhotos = {
 
 export const services = [
   {
+    slug: "tours",
     icon: "Compass",
     title: "Domestic & International Tours",
     desc: "Tailored packages — solo, honeymoon, family, corporate, senior citizens, Do Dham & Char Dham. Budget-flexible with fixed departures.",
   },
-  { icon: "Plane", title: "Flight Ticketing", desc: "Best fares on domestic & international airlines with 24/7 reissue support." },
-  { icon: "Ship", title: "Cruise Holidays", desc: "River, ocean and expedition cruises curated across the world's finest lines." },
-  { icon: "FileCheck2", title: "Passport & Visa Consultation", desc: "End-to-end documentation, appointment slots and interview coaching." },
-  { icon: "Hotel", title: "Hotel Reservations", desc: "Preferred rates with 40+ global chains, from boutique stays to 5-star suites." },
-  { icon: "Users", title: "MICE & Corporate Travel", desc: "Meetings, incentives, conferences, exhibitions, interviews & seminars — handled end to end." },
-  { icon: "TrainFront", title: "Rail & Bus Booking", desc: "IRCTC ticketing, tatkal support and pan-India bus reservations." },
+  { slug: "flights", icon: "Plane", title: "Flight Ticketing", desc: "Best fares on domestic & international airlines with 24/7 reissue support." },
+  { slug: "cruises", icon: "Ship", title: "Cruise Holidays", desc: "River, ocean and expedition cruises curated across the world's finest lines." },
+  { slug: "visas", icon: "FileCheck2", title: "Passport & Visa Consultation", desc: "End-to-end documentation, appointment slots and interview coaching." },
+  { slug: "hotels", icon: "Hotel", title: "Hotel Reservations", desc: "Preferred rates with 40+ global chains, from boutique stays to 5-star suites." },
+  { slug: "mice", icon: "Users", title: "MICE & Corporate Travel", desc: "Meetings, incentives, conferences, exhibitions, interviews & seminars — handled end to end." },
+  { slug: "rail-bus", icon: "TrainFront", title: "Rail & Bus Booking", desc: "IRCTC ticketing, tatkal support and pan-India bus reservations." },
 ];
 
 export const whyChooseUs = [
