@@ -135,7 +135,7 @@ export function SiteHeader() {
                     <ChevronDown className="h-3.5 w-3.5 opacity-70 transition group-hover:rotate-180" />
                   </Link>
                   <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                    <div className="w-[840px] rounded-3xl border border-border bg-background p-6 shadow-brand">
+                    <div className="w-[840px] max-h-[calc(100vh-120px)] overflow-y-auto rounded-3xl border border-border bg-background p-6 shadow-brand">
                       <div className="grid grid-cols-4 gap-6">
                         {/* Column 1: Within India */}
                         <div>
@@ -255,7 +255,7 @@ export function SiteHeader() {
                     <ChevronDown className="h-3.5 w-3.5 opacity-70 transition group-hover:rotate-180" />
                   </Link>
                   <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                    <div className="w-[600px] rounded-3xl border border-border bg-background p-6 shadow-brand">
+                    <div className="w-[600px] max-h-[calc(100vh-120px)] overflow-y-auto rounded-3xl border border-border bg-background p-6 shadow-brand">
                       <div className="grid grid-cols-3 gap-6">
                         <div>
                           <div className="font-extrabold text-[11px] text-accent mb-3 uppercase tracking-widest border-b pb-1 border-border/80">Leisure &amp; Romance</div>
@@ -312,7 +312,8 @@ export function SiteHeader() {
               );
             }
 
-            const wide = n.children!.length > 8;
+            const isServices = n.label === "Services";
+            const wide = isServices || n.children!.length > 8;
             return (
               <div key={n.label} className="group relative">
                 <Link
@@ -327,7 +328,9 @@ export function SiteHeader() {
                   className={`invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100`}
                 >
                   <div
-                    className={`rounded-2xl border border-border bg-background p-3 shadow-brand ${wide ? "w-[560px]" : "w-72"}`}
+                    className={`rounded-2xl border border-border bg-background p-3 shadow-brand max-h-[calc(100vh-120px)] overflow-y-auto ${
+                      wide ? "w-[560px]" : "w-72"
+                    }`}
                   >
                     <ul className={`grid gap-1 ${wide ? "grid-cols-2" : "grid-cols-1"}`}>
                       {n.children!.map((c) => (
@@ -336,10 +339,10 @@ export function SiteHeader() {
                             to={c.to}
                             hash={c.hash}
                             search={c.search}
-                            className="block rounded-lg px-3 py-2 text-sm hover:bg-secondary"
+                            className="block rounded-lg px-3 py-2 text-sm hover:bg-secondary transition-colors"
                           >
-                            <div className="font-semibold text-foreground">{c.label}</div>
-                            {c.desc && <div className="text-xs text-muted-foreground">{c.desc}</div>}
+                            <div className="font-semibold text-foreground text-xs">{c.label}</div>
+                            {c.desc && <div className="text-[11px] text-muted-foreground line-clamp-1">{c.desc}</div>}
                           </Link>
                         </li>
                       ))}
