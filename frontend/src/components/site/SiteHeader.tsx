@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone, ChevronDown, Sparkles } from "lucide-react";
+import { Menu, X, Phone, PhoneCall, ChevronDown, Sparkles, MessageCircle } from "lucide-react";
 import { brand, services, themes, regions } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/Logo";
@@ -83,20 +83,30 @@ export function SiteHeader() {
       <div className="hidden bg-primary text-primary-foreground py-1.5 text-xs border-b border-white/10 sm:block">
         <div className="container-page flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-[11px] font-medium opacity-90">
-            <span className="inline-flex items-center gap-1.5">
+            <span className="inline-flex items-center gap-1.5 font-bold">
               <Sparkles className="h-3 w-3 text-accent" /> Est. {brand.established} — Indore &amp; Chandigarh
             </span>
             <span className="hidden md:inline">• 10+ Years Trust • 50+ Countries</span>
           </div>
           <div className="flex items-center gap-4 text-[11px] font-semibold">
-            <a href={`tel:${brand.phones[0].tel}`} className="hover:text-accent transition-colors flex items-center gap-1">
-              <Phone className="h-3 w-3 text-accent" /> Indore: {brand.phones[0].number}
+            <a href={`tel:${brand.phones[0].tel}`} className="hover:text-accent transition-colors inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="opacity-80">Indore:</span>
+              <span className="font-extrabold">{brand.phones[0].number}</span>
             </a>
-            <a href={`tel:${brand.phones[1].tel}`} className="hover:text-accent transition-colors hidden lg:flex items-center gap-1">
-              <Phone className="h-3 w-3 text-accent" /> Chandigarh: {brand.phones[1].number}
+            <span className="opacity-30 hidden lg:inline">|</span>
+            <a href={`tel:${brand.phones[1].tel}`} className="hover:text-accent transition-colors hidden lg:inline-flex items-center gap-1.5">
+              <span className="opacity-80">Chandigarh:</span>
+              <span className="font-extrabold">{brand.phones[1].number}</span>
             </a>
-            <a href={`https://wa.me/${brand.whatsapp}`} target="_blank" rel="noreferrer" className="bg-accent/20 hover:bg-accent/30 text-accent font-extrabold px-2.5 py-0.5 rounded-md transition-all">
-              WhatsApp 24×7
+            <a
+              href={`https://wa.me/${brand.whatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 bg-[#25D366] text-white text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-xs hover:brightness-110 transition-all ml-1"
+            >
+              <MessageCircle className="h-3 w-3 fill-current stroke-none" />
+              <span>WhatsApp 24×7</span>
             </a>
           </div>
         </div>
@@ -355,15 +365,53 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 lg:ml-4">
-          <a
-            href={`tel:${brand.phones[1].tel}`}
-            className="hidden items-center gap-2 rounded-full border border-border px-3 py-2 text-sm font-medium text-foreground hover:bg-secondary md:inline-flex"
-          >
-            <Phone className="h-4 w-4 text-accent" />
-            {brand.phones[1].number}
-          </a>
-          <Button asChild size="sm" className="hidden bg-accent text-accent-foreground hover:bg-accent/90 md:inline-flex">
-            <Link to="/booking">Plan My Trip</Link>
+          {/* Helpline Widget with Dropdown for both offices */}
+          <div className="relative group hidden md:block">
+            <a
+              href={`tel:${brand.phones[0].tel}`}
+              className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-secondary/80 px-3.5 py-1.5 text-xs font-bold text-foreground hover:bg-secondary hover:border-accent/50 transition-all shadow-2xs"
+            >
+              <div className="grid h-7 w-7 place-items-center rounded-full bg-accent/15 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                <PhoneCall className="h-3.5 w-3.5" />
+              </div>
+              <div className="text-left leading-tight">
+                <div className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Helpline Desk</div>
+                <div className="text-xs font-extrabold text-foreground tracking-tight">{brand.phones[0].number}</div>
+              </div>
+            </a>
+
+            {/* Hover Popover showing both office contacts */}
+            <div className="invisible absolute right-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <div className="w-60 rounded-2xl border border-border bg-background p-3 shadow-brand space-y-2">
+                <div className="text-[10px] font-extrabold uppercase tracking-widest text-accent px-1">Direct Travel Desks</div>
+                <a
+                  href={`tel:${brand.phones[0].tel}`}
+                  className="flex items-center justify-between rounded-xl p-2.5 hover:bg-secondary transition-colors border border-transparent hover:border-border"
+                >
+                  <div>
+                    <div className="text-xs font-bold text-foreground">Indore Head Office</div>
+                    <div className="text-[11px] font-medium text-muted-foreground">{brand.phones[0].number}</div>
+                  </div>
+                  <PhoneCall className="h-3.5 w-3.5 text-accent shrink-0" />
+                </a>
+                <a
+                  href={`tel:${brand.phones[1].tel}`}
+                  className="flex items-center justify-between rounded-xl p-2.5 hover:bg-secondary transition-colors border border-transparent hover:border-border"
+                >
+                  <div>
+                    <div className="text-xs font-bold text-foreground">Chandigarh Branch</div>
+                    <div className="text-[11px] font-medium text-muted-foreground">{brand.phones[1].number}</div>
+                  </div>
+                  <PhoneCall className="h-3.5 w-3.5 text-accent shrink-0" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <Button asChild size="sm" className="hidden bg-accent text-accent-foreground hover:bg-accent/90 md:inline-flex font-extrabold shadow-sm">
+            <Link to="/booking" className="flex items-center gap-1">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Plan Your Tour</span>
+            </Link>
           </Button>
           <button
             aria-label="Toggle menu"
@@ -424,9 +472,10 @@ export function SiteHeader() {
             <Link
               to="/booking"
               onClick={() => setOpen(false)}
-              className="mt-3 rounded-md bg-accent px-3 py-3 text-center text-base font-semibold text-accent-foreground"
+              className="mt-3 rounded-xl bg-accent px-3 py-3 text-center text-base font-extrabold text-accent-foreground shadow-sm flex items-center justify-center gap-2"
             >
-              Plan My Trip
+              <Sparkles className="h-4 w-4" />
+              <span>Plan Your Tour</span>
             </Link>
           </div>
         </div>

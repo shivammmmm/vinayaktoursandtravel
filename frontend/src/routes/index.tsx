@@ -124,25 +124,9 @@ function Home() {
           </div>
         ))}
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/50 backdrop-blur-[1px]" aria-hidden />
-
-        {/* SLIDER CONTROLS (Next / Prev Arrows) */}
-        <button
-          onClick={prevSlide}
-          aria-label="Previous Slide"
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 hidden md:grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow-lg"
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-
-        <button
-          onClick={nextSlide}
-          aria-label="Next Slide"
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden md:grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow-lg"
-        >
-          <ChevronRight className="h-6 w-6" />
-        </button>
+        {/* Soft Gradient Overlay so background slides are bright and clearly visible */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/80 via-primary/45 to-black/25" aria-hidden />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-primary/70 via-transparent to-black/30" aria-hidden />
 
         {/* HERO CONTAINER CONTENT */}
         <div className="container-page py-16 text-primary-foreground md:py-24 relative z-10">
@@ -167,25 +151,47 @@ function Home() {
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-brand font-extrabold text-base px-7 rounded-full">
-                  <Link to="/booking">Plan Custom Trip <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link to="/booking">
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Customize Your Tour
+                  </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 font-bold rounded-full">
                   <Link to="/packages">Browse All Packages</Link>
                 </Button>
               </div>
 
-              {/* Slider Dots Indicator */}
-              <div className="mt-10 flex items-center gap-2">
-                {heroSlides.map((s, i) => (
+              {/* Slider Navigation Bar (Arrows + Dots) */}
+              <div className="mt-10 flex items-center gap-4">
+                <div className="flex items-center gap-2">
                   <button
-                    key={s.destination}
-                    onClick={() => setCurrentSlide(i)}
-                    aria-label={`Go to slide ${i + 1}`}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      i === currentSlide ? "w-8 bg-accent" : "w-2.5 bg-white/40 hover:bg-white/70"
-                    }`}
-                  />
-                ))}
+                    onClick={prevSlide}
+                    aria-label="Previous Slide"
+                    className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    aria-label="Next Slide"
+                    className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {heroSlides.map((s, i) => (
+                    <button
+                      key={s.destination}
+                      onClick={() => setCurrentSlide(i)}
+                      aria-label={`Go to slide ${i + 1}`}
+                      className={`h-2.5 rounded-full transition-all duration-300 ${
+                        i === currentSlide ? "w-8 bg-accent" : "w-2.5 bg-white/40 hover:bg-white/70"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 

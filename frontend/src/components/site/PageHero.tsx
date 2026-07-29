@@ -16,10 +16,10 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden isolate">
-      <div className="absolute inset-0 -z-10 brand-gradient opacity-95" />
+      <div className="absolute inset-0 -z-10 brand-gradient opacity-75" />
       {image && (
         <div
-          className="absolute inset-0 -z-10 bg-cover bg-center opacity-30 mix-blend-overlay scale-105 transition-transform duration-1000"
+          className="absolute inset-0 -z-10 bg-cover bg-center opacity-45 mix-blend-overlay scale-105 transition-transform duration-1000"
           style={{ backgroundImage: `url(${image})` }}
           aria-hidden
         />
