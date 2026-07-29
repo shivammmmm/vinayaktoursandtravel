@@ -242,13 +242,13 @@ export function SiteHeader() {
                     <ul className={`grid gap-1 ${wide ? "grid-cols-2" : "grid-cols-1"}`}>
                       {n.children!.map((c) => (
                         <li key={c.label}>
-                          <a
-                            href={c.to}
+                          <Link
+                            to={c.to}
                             className="block rounded-lg px-3 py-2 text-sm hover:bg-secondary"
                           >
                             <div className="font-semibold text-foreground">{c.label}</div>
                             {c.desc && <div className="text-xs text-muted-foreground">{c.desc}</div>}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
