@@ -269,10 +269,25 @@ export const galleryPhotos = [
   { src: galleryImg("photo-1551415923-a2297c7fda79"), alt: "Antarctic expedition ship near icebergs", cat: "Expeditions" },
 ];
 
-export const galleryVideos = [
-  { id: "9No-FiEInLA", title: "Kashmir — Paradise on Earth" },
-  { id: "3AtDnEC4zak", title: "Bali dreamscape" },
-  { id: "ry-TW9vqf0Y", title: "Switzerland scenic ride" },
+export const galleryLocalVideos = [
+  { src: "/africa video.mp4", title: "Africa safari & landscapes" },
+  { src: "/cruise video.mp4", title: "Ocean cruise experience" },
+  { src: "/cruise party video.mp4", title: "Cruise deck party" },
+];
+
+export const galleryDeals = [
+  { src: "/bali.jpeg", alt: "Bali 4 Nights Short Escape — Bedugul, Tanah Lot, ATV & snorkelling, from $170pp" },
+  { src: "/chennai cruise.jpeg", alt: "Cordelia Cruises Chennai getaway, 2 nights at sea, from ₹34,843" },
+  { src: "/cherry blossom_japan.jpeg", alt: "Cherry Blossom 2027 Japan tour, from $1,099pp" },
+  { src: "/china.jpeg", alt: "China 8N/9D — Shanghai, Beijing, Xi'an, Chongqing & Chengdu, from ₹1,99,000pp" },
+  { src: "/London Cab.png", alt: "Book flights, trains, buses & cabs from London to Paris in one click" },
+  { src: "/Macau.png", alt: "Macau experiences — House of Dancing Water, Golden Reel Ferris Wheel & teamLab SuperNature" },
+  { src: "/Middle East & Africa.jpeg", alt: "Vinayak Tours & Travel expands to the Middle East & Africa — Marketplace LLC, UAE" },
+  { src: "/Seychelles.jpeg", alt: "Seychelles Twin Island Getaway, 5 nights, from €722pp" },
+  { src: "/srilanka cruise.jpeg", alt: "Cordelia Cruises sail to Sri Lanka — Chennai, Hambantota, Trincomalee & Jaffna" },
+  { src: "/super machaa cruise.jpeg", alt: "Superr Macha Cruise — the South's biggest party at sea" },
+  { src: "/Turkey.jpeg", alt: "Turkey Grand Discovery, 10 nights, from $1,187pp — Istanbul, Cappadocia & Bodrum" },
+  { src: "/unique hotels deal.jpeg", alt: "Kruger Shalati — a once-in-a-lifetime hotel experience, South Africa" },
 ];
 
 export type PackageCategory = "india" | "international" | "luxury" | "adventure";
