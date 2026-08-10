@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageHero, Section } from "@/components/site/PageHero";
-import { galleryPhotos, galleryVideos } from "@/lib/site-data";
+import { galleryPhotos, galleryLocalVideos, galleryDeals } from "@/lib/site-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -39,6 +39,7 @@ function GalleryPage() {
           <TabsList>
             <TabsTrigger value="photos">Photos</TabsTrigger>
             <TabsTrigger value="videos">Videos</TabsTrigger>
+            <TabsTrigger value="deals">Deals</TabsTrigger>
           </TabsList>
 
           <TabsContent value="photos" className="mt-6">
@@ -80,20 +81,38 @@ function GalleryPage() {
 
           <TabsContent value="videos" className="mt-6">
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {galleryVideos.map((v) => (
-                <div key={v.id} className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+              {galleryLocalVideos.map((v) => (
+                <div key={v.src} className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
                   <div className="aspect-video">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${v.id}`}
+                    <video
+                      src={v.src}
                       title={v.title}
-                      className="h-full w-full"
-                      loading="lazy"
-                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
+                      className="h-full w-full object-cover"
+                      controls
+                      preload="metadata"
                     />
                   </div>
                   <div className="p-4 text-sm font-semibold">{v.title}</div>
                 </div>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="deals" className="mt-6">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {galleryDeals.map((d) => (
+                <button
+                  key={d.src}
+                  onClick={() => setPreview(d.src)}
+                  className="group overflow-hidden rounded-2xl border border-border bg-card shadow-card"
+                >
+                  <img
+                    src={d.src}
+                    alt={d.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </button>
               ))}
             </div>
           </TabsContent>
