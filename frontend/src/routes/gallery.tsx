@@ -89,6 +89,7 @@ function GalleryPage() {
                       title={v.title}
                       className="h-full w-full object-cover"
                       controls
+                      playsInline
                       preload="metadata"
                     />
                   </div>
@@ -121,7 +122,13 @@ function GalleryPage() {
 
       <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}>
         <DialogContent className="max-w-4xl overflow-hidden p-0">
-          {preview && <img src={preview} alt="Preview" className="h-auto w-full" />}
+          {preview && (
+            <img
+              src={preview}
+              alt="Preview"
+              className="mx-auto block max-h-[85vh] w-auto max-w-full object-contain"
+            />
+          )}
         </DialogContent>
       </Dialog>
     </div>

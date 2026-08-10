@@ -103,11 +103,11 @@ export function FloatingContactBar() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2.5 max-w-[calc(100vw-2rem)]">
-      
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2.5 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)]">
+
       {/* BOT CHAT MODAL WINDOW */}
       {botOpen && (
-        <div className="w-[min(370px,calc(100vw-2rem))] overflow-hidden rounded-3xl border border-border bg-card shadow-brand flex flex-col h-[460px] animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="w-[min(370px,calc(100vw-2rem))] overflow-hidden rounded-3xl border border-border bg-card shadow-brand flex flex-col h-[min(460px,calc(100vh-6rem))] animate-in fade-in slide-in-from-bottom-5 duration-300">
           {/* Header */}
           <div className="flex items-center justify-between bg-primary px-4 py-3.5 text-primary-foreground">
             <div className="flex items-center gap-2.5">
