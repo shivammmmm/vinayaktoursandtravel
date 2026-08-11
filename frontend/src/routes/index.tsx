@@ -25,7 +25,7 @@ const whyIcons = [Star, Wallet, MapPin, Globe2, ShieldCheck, Headphones];
 
 const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=1800&q=80",
+    image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1800&q=80",
     destination: "Kashmir — Dal Lake & Gulmarg",
     eyebrow: "Paradise on Earth",
     title: "Chasing Snow & Serenity in Kashmir",

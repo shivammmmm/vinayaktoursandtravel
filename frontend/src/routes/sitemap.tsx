@@ -38,7 +38,7 @@ function Sitemap() {
               <li><Link to="/themes" className="hover:text-accent font-medium">Browse by Theme</Link></li>
               <li><Link to="/destinations" className="hover:text-accent font-medium">Destinations</Link></li>
               <li><Link to="/gallery" className="hover:text-accent font-medium">Media Gallery</Link></li>
-              <li><Link to="/booking" className="hover:text-accent font-medium">Get a Free Quote</Link></li>
+              <li><Link to="/booking" className="hover:text-accent font-medium">Plan Your Tour</Link></li>
               <li><Link to="/contact" className="hover:text-accent font-medium">Contact Us</Link></li>
             </ul>
           </div>
