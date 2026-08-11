@@ -15,7 +15,7 @@ export function SiteFooter() {
             </div>
             <div>
               <div className="font-extrabold text-base text-white">100% Transparency &amp; Trust</div>
-              <div className="text-xs text-white/70">No hidden fees · Zero advance required to draft custom itinerary</div>
+              <div className="text-xs text-white/70">No hidden costs · Tailored itineraries · 24/7 expert travel support</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -24,7 +24,7 @@ export function SiteFooter() {
               className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-xs font-black text-accent-foreground hover:brightness-110 transition-all shadow"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Get Free Quote</span>
+              <span>Plan Your Tour</span>
             </Link>
           </div>
         </div>
@@ -100,6 +100,7 @@ export function SiteFooter() {
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-accent shrink-0" />
+              {/* NOTE: Replace with new domain email once purchased */}
               <a href={`mailto:${brand.emails[0]}`} className="hover:text-accent text-[11px]">{brand.emails[0]}</a>
             </li>
           </ul>

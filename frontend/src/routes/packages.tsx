@@ -4,7 +4,7 @@ import { z } from "zod";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { packages, packageCategories, type PackageCategory } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, Check } from "lucide-react";
+import { MapPin, Clock, Check, Calendar } from "lucide-react";
 
 const packagesSearchSchema = z.object({
   category: z.string().optional(),
@@ -105,7 +105,7 @@ function PackagesPage() {
                 </ul>
                 <div className="mt-5 flex gap-2">
                   <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                    <Link to="/booking" search={{ destination: p.title }}>Get free quote</Link>
+                    <Link to="/booking" search={{ destination: p.title }}>Plan This Trip</Link>
                   </Button>
                   <Button asChild size="sm" variant="outline">
                     <Link to="/contact">Talk to us</Link>

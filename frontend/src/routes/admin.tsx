@@ -27,8 +27,11 @@ type Lead = {
   destination: string;
   duration: string;
   travelDate?: string;
+  adults?: number;
+  children?: number;
   budget?: string;
   city: string;
+  remarks?: string;
   notes?: string;
   date: string;
   status: "New" | "Contacted" | "Closed" | "Cancelled";
@@ -288,9 +291,10 @@ function AdminPanel() {
                           <div><strong className="text-foreground">Contact:</strong> {l.mobile} · {l.email}</div>
                           <div><strong className="text-foreground">Origin City:</strong> {l.city}</div>
                         </div>
-                        {l.notes && (
-                          <div className="text-xs bg-secondary/50 p-2.5 rounded-lg border border-border/80 text-foreground/80">
-                            <strong>Note:</strong> {l.notes}
+                        {(l.remarks || l.notes) && (
+                          <div className="text-xs bg-secondary/50 p-2.5 rounded-lg border border-border/80 text-foreground/80 space-y-1">
+                            {l.remarks && <div><strong>Remarks:</strong> {l.remarks}</div>}
+                            {l.notes && <div><strong>Notes:</strong> {l.notes}</div>}
                           </div>
                         )}
                       </div>
