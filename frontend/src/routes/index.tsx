@@ -5,7 +5,8 @@ import {
   Compass, Plane, Ship, FileCheck2, Hotel, Users, TrainFront,
   Star, ShieldCheck, Wallet, Globe2, Headphones, MapPin, ArrowRight,
   Sparkles, CheckCircle2, Search, Calendar, UserCheck, Clock, Award,
-  ChevronLeft, ChevronRight, Building2, PhoneCall, Check, ExternalLink
+  ChevronLeft, ChevronRight, Building2, PhoneCall, Check, MessageCircle,
+  X, HelpCircle, ChevronDown
 } from "lucide-react";
 import { brand, regions, services, whyChooseUs, testimonials, corporateClients, airlines, hotelGroups, themes, durations, faqs, galleryPhotos, packages, officePhotos } from "@/lib/site-data";
 import { DestinationCard } from "@/components/site/DestinationCard";
@@ -60,14 +61,17 @@ const heroSlides = [
   },
 ];
 
+// Today's date for min attribute
+const todayStr = new Date().toISOString().split("T")[0];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Vinayak Tours & Travel — Tailor-made journeys since 2014" },
-      { name: "description", content: "Custom domestic & international tour packages, honeymoon, MICE, cruises, flights and visas — from Indore and Chandigarh. Get a free trip quote." },
-      { name: "keywords", content: "budget tour, budget travel, travel plan, tour package, honeymoon, mauritius, Maldives, africa, usa, uk, London, paris, Europe, germany, japan, china, goa, dubai, bali, Thailand, vietnam, wildlife, safari, expedition, vacation, luxury package, luxury, group tour, cruise, family, travel agent Indore, travel agent Chandigarh" },
+      { title: "Vinayak Tours & Travel — Tailor-made journeys since 2014 | Indore & Chandigarh" },
+      { name: "description", content: "Single stop shop for all your travel needs — domestic & international tours, honeymoon, MICE, cruises, flights, visas. From budget to luxury, solo to corporate. Offices in Indore & Chandigarh. Call +91 93006 55686." },
+      { name: "keywords", content: "travel agent Indore, travel agent Chandigarh, budget tour, tour package, honeymoon, Maldives, Africa, USA, UK, London, Paris, Europe, Germany, Japan, China, Goa, Dubai, Bali, Thailand, Vietnam, wildlife, safari, cruise, family tour, MICE, Char Dham Yatra, fixed departure, group tour, luxury package" },
       { property: "og:title", content: "Vinayak Tours & Travel — Tailor-made journeys since 2014" },
-      { property: "og:description", content: "Custom domestic & international tour packages, honeymoon, MICE, cruises, flights and visas — from Indore and Chandigarh. Get a free trip quote." },
+      { property: "og:description", content: "Custom domestic & international tour packages, honeymoon, MICE, cruises, flights and visas — from Indore and Chandigarh." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -79,6 +83,7 @@ function Home() {
   const featured = useMemo(() => regions.slice(0, 3).flatMap((r) => r.destinations.slice(0, 3)), []);
   const [selectedTheme, setSelectedTheme] = useState<string>("All");
   const [activeTab, setActiveTab] = useState<string>("tours");
+  const [showConfidenceModal, setShowConfidenceModal] = useState(false);
 
   // Hero Slider State
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -96,18 +101,72 @@ function Home() {
   const activeSlideData = heroSlides[currentSlide];
 
   const filteredPackages = useMemo(() => {
-    if (selectedTheme === "All") return packages.slice(0, 6);
+    if (selectedTheme === "All") return packages.filter(p => !p.isFixed).slice(0, 6);
     return packages.filter((p) =>
-      p.title.toLowerCase().includes(selectedTheme.toLowerCase()) ||
-      p.highlights.some((h) => h.toLowerCase().includes(selectedTheme.toLowerCase()))
+      !p.isFixed && (
+        p.title.toLowerCase().includes(selectedTheme.toLowerCase()) ||
+        p.highlights.some((h) => h.toLowerCase().includes(selectedTheme.toLowerCase()))
+      )
     ).slice(0, 6);
   }, [selectedTheme]);
 
   return (
     <div className="overflow-hidden">
-      {/* HERO SECTION WITH INTERACTIVE BACKGROUND SLIDER */}
+
+      {/* CONFIDENCE MODAL */}
+      {showConfidenceModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowConfidenceModal(false)}>
+          <div className="relative bg-card rounded-3xl shadow-brand max-w-lg w-full p-8 border border-border" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setShowConfidenceModal(false)}
+              className="absolute top-4 right-4 grid h-8 w-8 place-items-center rounded-full bg-secondary hover:bg-border transition"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl brand-gradient text-white">
+                <ShieldCheck className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-foreground">Why Trust Vinayak Tours?</h3>
+                <p className="text-xs text-muted-foreground">10+ years · 2 real offices · 25,000+ travellers</p>
+              </div>
+            </div>
+            <ul className="space-y-3 text-sm text-foreground/80">
+              {[
+                "🏢 Two physical offices — Indore (M.P.) & Chandigarh — you can walk in any time",
+                "📋 IRCTC authorized rail desk + IATA preferred airline partnerships",
+                "💼 21+ years combined industry experience with both founders being global travellers",
+                "📞 24×7 WhatsApp support — never feel alone at the airport or abroad",
+                "💰 Transparent pricing — no hidden charges, no advance for itinerary",
+                "🌍 50+ countries covered · 25,000+ happy travellers served",
+                "🏨 Direct contracts with 40+ global hotel chains for best rates",
+                "👨‍👩‍👧 Serving families, solo travellers, honeymooners, corporates & spiritual yatras",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex gap-3">
+              <Button asChild className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
+                <Link to="/booking" onClick={() => setShowConfidenceModal(false)}>Plan My Tour</Link>
+              </Button>
+              <Button asChild variant="outline" className="flex-1">
+                <a href={`https://wa.me/${brand.whatsapp}`} target="_blank" rel="noreferrer">
+                  <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp Us
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* HERO SECTION */}
       <section className="relative isolate min-h-[90vh] flex items-center justify-center overflow-hidden">
-        
+
         {/* SLIDER BACKGROUND IMAGES */}
         {heroSlides.map((slide, idx) => (
           <div
@@ -124,17 +183,14 @@ function Home() {
           </div>
         ))}
 
-        {/* Soft Neutral Vignette Overlay (No blue tint, natural photo colors with crisp text readability) */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/65 via-black/25 to-transparent" aria-hidden />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-black/20" aria-hidden />
 
-        {/* HERO CONTAINER CONTENT */}
         <div className="container-page py-16 text-primary-foreground md:py-24 relative z-10">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            
+
             {/* LEFT CONTENT */}
             <div>
-              {/* Dynamic Slide Badge */}
               <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
                 <MapPin className="h-3.5 w-3.5 text-accent animate-pulse-subtle" />
                 <span>{activeSlideData.destination}</span>
@@ -153,7 +209,7 @@ function Home() {
                 <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-brand font-extrabold text-base px-7 rounded-full">
                   <Link to="/booking">
                     <Sparkles className="mr-2 h-4 w-4" />
-                    Customize Your Tour
+                    Plan Your Tour
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 font-bold rounded-full">
@@ -161,25 +217,25 @@ function Home() {
                 </Button>
               </div>
 
-              {/* Slider Navigation Bar (Arrows + Dots) */}
+              {/* Confused about agency? */}
+              <button
+                onClick={() => setShowConfidenceModal(true)}
+                className="mt-5 inline-flex items-center gap-2 text-white/80 hover:text-white text-xs font-semibold underline-offset-2 hover:underline transition-all"
+              >
+                <HelpCircle className="h-4 w-4" />
+                Confused about choosing us? Read why 25,000+ trust us →
+              </button>
+
+              {/* Slider Navigation */}
               <div className="mt-10 flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={prevSlide}
-                    aria-label="Previous Slide"
-                    className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow"
-                  >
+                  <button onClick={prevSlide} aria-label="Previous Slide" className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow">
                     <ChevronLeft className="h-4 w-4" />
                   </button>
-                  <button
-                    onClick={nextSlide}
-                    aria-label="Next Slide"
-                    className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow"
-                  >
+                  <button onClick={nextSlide} aria-label="Next Slide" className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-accent hover:text-accent-foreground transition-all shadow">
                     <ChevronRight className="h-4 w-4" />
                   </button>
                 </div>
-
                 <div className="flex items-center gap-2">
                   {heroSlides.map((s, i) => (
                     <button
@@ -195,9 +251,13 @@ function Home() {
               </div>
             </div>
 
-            {/* RIGHT SEARCH CONSOLE WIDGET */}
+            {/* RIGHT SEARCH CONSOLE */}
             <div className="rounded-3xl border border-white/20 bg-white/95 p-6 text-foreground shadow-brand backdrop-blur-xl">
-              
+              <div className="mb-4">
+                <h2 className="text-base font-extrabold text-foreground">Plan Your Tour</h2>
+                <p className="text-xs text-muted-foreground mt-0.5">Your custom itinerary is just one conversation away</p>
+              </div>
+
               {/* Tab Selector */}
               <div className="mb-5 flex rounded-2xl bg-secondary p-1">
                 {[
@@ -234,13 +294,13 @@ function Home() {
                 }}
               >
                 <div className="grid gap-1.5">
-                  <Label htmlFor="destination" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <Label htmlFor="dest-widget" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                     Where would you like to go?
                   </Label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
-                      id="destination"
+                      id="dest-widget"
                       name="destination"
                       placeholder="e.g. Bali, Kashmir, Dubai, Switzerland"
                       className="pl-9 font-medium"
@@ -261,13 +321,13 @@ function Home() {
                   </div>
 
                   <div className="grid gap-1.5">
-                    <Label htmlFor="travellers" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    <Label htmlFor="travellers-widget" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                       Travellers
                     </Label>
                     <div className="relative">
                       <UserCheck className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
-                        id="travellers"
+                        id="travellers-widget"
                         name="travellers"
                         type="number"
                         min={1}
@@ -282,26 +342,25 @@ function Home() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="grid gap-1.5">
-                    <Label htmlFor="date" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    <Label htmlFor="date-widget" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                       Travel Date
                     </Label>
-                    <Input id="date" name="date" type="date" className="font-medium text-xs" />
+                    <Input id="date-widget" name="date" type="date" min={todayStr} className="font-medium text-xs" />
                   </div>
-
                   <div className="grid gap-1.5">
-                    <Label htmlFor="budget" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    <Label htmlFor="budget-widget" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                       Approx Budget (₹)
                     </Label>
-                    <Input id="budget" name="budget" type="number" min={0} placeholder="e.g. 50000" className="font-medium" />
+                    <Input id="budget-widget" name="budget" type="number" min={0} placeholder="e.g. 50000" className="font-medium" />
                   </div>
                 </div>
 
                 <Button type="submit" className="mt-2 w-full bg-accent text-accent-foreground hover:bg-accent/90 font-extrabold text-sm py-5 shadow-md rounded-xl">
-                  <Search className="mr-2 h-4 w-4" /> Get Free Custom Quote
+                  <Search className="mr-2 h-4 w-4" /> Plan My Journey
                 </Button>
 
                 <p className="text-center text-[11px] text-muted-foreground font-medium">
-                  🔒 100% Free Quote · Zero Advance Required to Draft Itinerary
+                  🔒 No advance required · Custom itinerary at no extra cost
                 </p>
               </form>
             </div>
@@ -309,8 +368,34 @@ function Home() {
         </div>
       </section>
 
+      {/* AGENCY INTRO TICKER / STRIP */}
+      <section className="bg-accent text-accent-foreground py-3 overflow-hidden border-b border-accent/20">
+        <div className="flex animate-marquee whitespace-nowrap gap-12 text-xs font-bold uppercase tracking-widest">
+          {[
+            "✈️ Single Stop Shop — Train · Bus · Hotels · Flights · Cruises · Visas",
+            "🌏 Domestic & International — 50+ Countries",
+            "💎 Budget to Premium to Ultra Luxury — All Inventories",
+            "👨‍👩‍👧 Solo · Couple · Family · Group · Corporate · MICE",
+            "🕌 Char Dham & Do Dham Yatras",
+            "🚌 Budget Bus/Train Tours — Short & Long Durations",
+            "📅 Fixed Departures — Best & Economical Itineraries",
+            "🤝 Trusted Vendors Across the Globe — Travel Hassle-Free",
+            "📞 24×7 Dedicated Support — Airport · Abroad · Overnight",
+            "🌴 Honeymoon · Weekend Getaways · Adventure · Wildlife Safaris",
+          ].concat([
+            "✈️ Single Stop Shop — Train · Bus · Hotels · Flights · Cruises · Visas",
+            "🌏 Domestic & International — 50+ Countries",
+            "💎 Budget to Premium to Ultra Luxury — All Inventories",
+            "👨‍👩‍👧 Solo · Couple · Family · Group · Corporate · MICE",
+            "🕌 Char Dham & Do Dham Yatras",
+          ]).map((text, i) => (
+            <span key={i} className="shrink-0">{text}</span>
+          ))}
+        </div>
+      </section>
+
       {/* STATS & ACCREDITATION BAR */}
-      <section className="bg-primary text-primary-foreground py-8 border-t border-b border-white/10">
+      <section className="bg-primary text-primary-foreground py-8 border-b border-white/10">
         <div className="container-page grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
             { value: "10+ Years", label: "Registered Travel Desk (Est. 2014)" },
@@ -326,7 +411,7 @@ function Home() {
         </div>
       </section>
 
-      {/* REAL OFFICE & TEAM SHOWCASE (Authentic Travel Agency Section) */}
+      {/* REAL OFFICE & TEAM SHOWCASE */}
       <Section
         eyebrow="Our physical offices"
         title="Real Offices in Indore & Chandigarh"
@@ -336,16 +421,18 @@ function Home() {
           {/* Photos grid */}
           <div className="grid grid-cols-2 gap-4">
             <div className="group relative overflow-hidden rounded-3xl col-span-2 aspect-[16/9] shadow-card">
-              <img src={officePhotos.building} alt="Indore Head Office Building" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={officePhotos.building} alt="Vinayak Tours & Travel Head Office Building" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 text-white">
-                <span className="rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">Indore HQ</span>
-                <p className="mt-1 text-xs text-white/90">Treser Vihar, Bijalpur, Indore (M.P.)</p>
+                <div className="rounded-xl bg-accent px-3 py-1.5 text-xs font-black text-accent-foreground inline-block mb-1">
+                  VINAYAK TOURS & TRAVEL
+                </div>
+                <p className="text-xs text-white/90">103, TREASURE VIHAR, Bijalpur, Indore (M.P.)</p>
               </div>
             </div>
 
             <div className="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card">
-              <img src={officePhotos.workstations} alt="Chandigarh Office Desk" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={officePhotos.workstations} alt="Chandigarh Office" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 text-white">
                 <span className="rounded-full bg-white/20 backdrop-blur px-2.5 py-0.5 text-[10px] font-bold">Chandigarh Branch</span>
@@ -366,7 +453,10 @@ function Home() {
             <div className="rounded-3xl border border-border bg-card p-6 shadow-card">
               <h3 className="text-2xl font-bold text-foreground">Meet Your Travel Designers</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                Founded in 2014, Vinayak Tours &amp; Travel has grown into a trusted two-city travel operation with preferred airline rates, dedicated ground logistics, and 24x7 WhatsApp support.
+                <strong>Qualified, trained & experienced professionals with 21+ years of industry experience</strong> — catering to your personalized travel needs with your budget and preferences in mind. Both are passionate Global Travelers, and with their onsite experiences and keen observations, your journey will certainly be exceptional!
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                Founded in 2014, Vinayak Tours & Travel has grown into a trusted two-city travel operation with preferred airline rates, dedicated ground logistics, and 24×7 WhatsApp support.
               </p>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -391,12 +481,24 @@ function Home() {
             <div className="rounded-3xl bg-accent/10 border border-accent/30 p-6 flex items-start gap-4">
               <ShieldCheck className="h-8 w-8 text-accent shrink-0 mt-1" />
               <div>
-                <h4 className="font-bold text-base text-foreground">100% Authorized &amp; Transparent</h4>
+                <h4 className="font-bold text-base text-foreground">100% Authorized & Transparent</h4>
                 <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                  IRCTC authorized rail ticketing desk, IATA preferred airline partnerships, and direct hotel contract rates across 40+ chains worldwide.
+                  IRCTC authorized rail ticketing desk, IATA preferred airline partnerships, and direct hotel contract rates across 40+ chains worldwide. 24×7 support — we're always there, at airports, abroad, or at overnight hours.
                 </p>
               </div>
             </div>
+
+            <button
+              onClick={() => setShowConfidenceModal(true)}
+              className="w-full rounded-2xl border border-dashed border-accent/50 bg-accent/5 hover:bg-accent/10 p-4 text-left flex items-center gap-3 transition-all"
+            >
+              <HelpCircle className="h-5 w-5 text-accent shrink-0" />
+              <div>
+                <div className="text-sm font-bold text-foreground">Confused about packages or doubtful about choosing us?</div>
+                <div className="text-xs text-muted-foreground mt-0.5">Click here — we'll build your confidence with facts & proof</div>
+              </div>
+              <ChevronDown className="h-4 w-4 text-muted-foreground ml-auto shrink-0 -rotate-90" />
+            </button>
           </div>
         </div>
       </Section>
@@ -454,7 +556,7 @@ function Home() {
         </div>
         <div className="mt-8 text-center">
           <Button asChild variant="outline" size="lg" className="rounded-full font-bold">
-            <Link to="/services">See All 7 Services</Link>
+            <Link to="/services">See All Services</Link>
           </Button>
         </div>
       </Section>
@@ -473,7 +575,7 @@ function Home() {
         </div>
       </Section>
 
-      {/* SIGNATURE PACKAGES WITH DYNAMIC THEME FILTER */}
+      {/* SIGNATURE PACKAGES */}
       <div className="bg-secondary/40">
         <Section
           eyebrow="Handpicked Holidays"
@@ -530,7 +632,7 @@ function Home() {
 
                 <div className="p-6 pt-0 flex gap-2">
                   <Button asChild size="sm" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-extrabold">
-                    <Link to="/booking" search={{ destination: p.title }}>Get Free Quote</Link>
+                    <Link to="/booking" search={{ destination: p.title }}>Plan This Trip</Link>
                   </Button>
                 </div>
               </article>
@@ -545,10 +647,10 @@ function Home() {
         </Section>
       </div>
 
-      {/* TESTIMONIALS */}
+      {/* TESTIMONIALS — condensed */}
       <Section eyebrow="Loved By Travellers" title="What our guests are saying">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.slice(0, 6).map((t) => (
+          {testimonials.slice(0, 3).map((t) => (
             <figure key={t.name} className="card-hover rounded-3xl border border-border bg-card p-6 shadow-card flex flex-col justify-between">
               <div>
                 <div className="mb-3 flex gap-1 text-accent">
@@ -568,70 +670,40 @@ function Home() {
             </figure>
           ))}
         </div>
+        <div className="mt-6 text-center">
+          <Button asChild variant="outline" size="sm" className="rounded-full font-semibold">
+            <Link to="/about">Read More Reviews →</Link>
+          </Button>
+        </div>
       </Section>
 
       {/* CORPORATE & ALLIANCES */}
       <div className="bg-secondary/50">
         <Section eyebrow="Trusted Partners" title="Corporates &amp; Global Alliances">
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-card">
-            <div className="text-xs font-extrabold uppercase tracking-widest text-accent mb-4">Corporate Clients</div>
-            <div className="flex flex-wrap gap-2.5">
-              {corporateClients.map((c) => (
-                <span key={c} className="rounded-xl bg-secondary border border-border px-4 py-2 text-xs font-bold text-foreground">
-                  {c}
-                </span>
-              ))}
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-card md:col-span-1">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-accent mb-4">Corporate Clients</div>
+              <div className="flex flex-wrap gap-2">
+                {corporateClients.map((c) => (
+                  <span key={c} className="rounded-xl bg-secondary border border-border px-3 py-1.5 text-xs font-bold text-foreground">{c}</span>
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-card">
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-card">
               <div className="text-xs font-extrabold uppercase tracking-widest text-accent mb-4">Preferred Airlines</div>
               <div className="flex flex-wrap gap-2 text-xs font-semibold">
                 {airlines.map((a) => <span key={a} className="rounded-full border border-border bg-secondary/50 px-3 py-1.5">{a}</span>)}
               </div>
             </div>
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-card">
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-card">
               <div className="text-xs font-extrabold uppercase tracking-widest text-accent mb-4">Hotel Groups</div>
               <div className="flex flex-wrap gap-2 text-xs font-semibold">
-                {hotelGroups.map((h) => <span key={h} className="rounded-full border border-border bg-secondary/50 px-3 py-1.5">{h}</span>)}
+                {hotelGroups.slice(0, 10).map((h) => <span key={h} className="rounded-full border border-border bg-secondary/50 px-3 py-1.5">{h}</span>)}
               </div>
             </div>
           </div>
         </Section>
       </div>
-
-      {/* FAQ */}
-      <Section eyebrow="FAQ" title="Frequently asked questions" subtitle="Everything you might want to know before you plan.">
-        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <Accordion type="single" collapsible className="rounded-3xl border border-border bg-card px-6 shadow-card">
-            {faqs.map((f, i) => (
-              <AccordionItem key={f.q} value={`item-${i}`} className="border-border">
-                <AccordionTrigger className="text-left text-base font-bold py-5">{f.q}</AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">{f.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-card flex flex-col justify-between">
-            <div>
-              <Award className="h-10 w-10 text-accent mb-4" />
-              <h3 className="text-2xl font-bold text-foreground">Have Questions?</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                Our travel team in Indore &amp; Chandigarh is available 7 days a week for instant itinerary consultations.
-              </p>
-            </div>
-            <div className="mt-6 flex flex-col gap-3">
-              <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-extrabold py-5">
-                <Link to="/booking">Request Call Back</Link>
-              </Button>
-              <Button asChild variant="outline" className="w-full font-bold">
-                <a href={`https://wa.me/${brand.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp Us Directly</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Section>
 
       {/* FINAL CTA */}
       <Section>
@@ -640,12 +712,12 @@ function Home() {
             <div>
               <h2 className="text-3xl font-black md:text-5xl tracking-tight">Ready when you are.</h2>
               <p className="mt-3 max-w-xl text-base md:text-lg opacity-90 leading-relaxed font-normal">
-                Tell us your travel dates and dream destination — our experts will send a custom itinerary with transparent pricing within a few hours.
+                Skip the planning stress — tell us your dream destination and travel dates. Our experts will send a custom itinerary with transparent pricing.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 md:justify-end">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-black text-base px-8 shadow-md">
-                <Link to="/booking">Get Free Quote</Link>
+                <Link to="/booking">Plan Your Tour</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 font-bold">
                 <Link to="/contact">Visit Offices</Link>

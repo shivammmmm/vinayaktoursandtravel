@@ -22,12 +22,13 @@ const initialBrand = {
     { name: "Honey Rajpal (Indore)", number: "+91 93006 55686", tel: "+919300655686" },
     { name: "Ajay Rajpal (Chandigarh)", number: "+91 90391 39194", tel: "+919039139194" },
   ],
-  emails: ["vinayakindore2000@gmail.com", "info@vinayaktoursntravel.com"],
+  // NOTE: Replace with new domain email once purchased (e.g. info@vinayaktoursandtravel.com)
+  emails: ["vinayakindore2000@gmail.com", "vinayakindore2000@gmail.com"],
   youtube: "https://www.youtube.com/@vinayaktoursntravel",
   offices: [
     {
       city: "Indore (HQ)",
-      address: "103, Treser Vihar, Bijalpur, Indore (M.P.)",
+      address: "103, TREASURE VIHAR, Bijalpur, Indore (M.P.)",
       contact: "Honey Rajpal · +91 93006 55686",
       mapQuery: "Bijalpur+Indore+Madhya+Pradesh",
     },
@@ -62,7 +63,7 @@ export const services = [
   { slug: "visas", icon: "FileCheck2", title: "Passport & Visa Consultation", desc: "End-to-end documentation, appointment slots and interview coaching." },
   { slug: "hotels", icon: "Hotel", title: "Hotel Reservations", desc: "Preferred rates with 40+ global chains, from boutique stays to 5-star suites." },
   { slug: "mice", icon: "Users", title: "MICE & Corporate Travel", desc: "Meetings, incentives, conferences, exhibitions, interviews & seminars — handled end to end." },
-  { slug: "rail-bus", icon: "TrainFront", title: "Rail & Bus Booking", desc: "IRCTC ticketing, tatkal support and pan-India bus reservations." },
+  { slug: "rail-bus", icon: "TrainFront", title: "Rail & Bus Booking", desc: "IRCTC authorized ticketing and pan-India bus reservations with real-time availability." },
 ];
 
 export const whyChooseUs = [
@@ -71,13 +72,13 @@ export const whyChooseUs = [
   { title: "Two Home Bases", desc: "Offices in Indore and Chandigarh, service across India." },
   { title: "One-Stop Shop", desc: "Flights, hotels, visas, cruises, rail & bus under one roof." },
   { title: "Global Alliances", desc: "Preferred partnerships with leading airlines and hotel groups." },
-  { title: "Dedicated Support", desc: "A real human on WhatsApp before, during and after your trip." },
+  { title: "Dedicated 24×7 Support", desc: "A real human on WhatsApp before, during and after your trip — at the airport, abroad, overnight — we're always there." },
 ];
 
 export const themes = [
-  "Religious", "Wildlife", "Climbing Expeditions", "Cultural & Heritage", "Family Tour",
+  "Religious", "Wildlife", "Trekking", "Climbing Expeditions", "Cultural & Heritage", "Family Tour",
   "Group Tours", "Solo Trip", "Honeymooners", "Weekend Tours", "Fixed Departures",
-  "Beach Tours", "Cruise Tours", "Underwater Expeditions",
+  "Beach Tours", "Cruise Tours", "Underwater Expeditions", "MICE & Corporate",
 ];
 
 type Dest = { name: string; slug: string; image: string; blurb: string; from?: string };
@@ -90,8 +91,12 @@ export const regions: { key: string; label: string; destinations: Dest[] }[] = [
       { name: "Kerala", slug: "kerala", image: img("photo-1602216056096-3b40cc0c9944"), blurb: "Backwaters, houseboats and hill stations.", from: "₹ 18,499" },
       { name: "Rajasthan", slug: "rajasthan", image: img("photo-1477587458883-47145ed94245"), blurb: "Forts, palaces and desert nights.", from: "₹ 16,999" },
       { name: "Kashmir", slug: "kashmir", image: img("photo-1566837945700-30057527ade0"), blurb: "Shikaras on Dal Lake and snowy Gulmarg.", from: "₹ 21,499" },
-      { name: "Himachal", slug: "himachal", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Manali, Shimla and the Spiti circuit.", from: "₹ 14,999" },
-      { name: "Char Dham Yatra", slug: "char-dham", image: img("photo-1567333567901-99f4feb2bbf9"), blurb: "Yamunotri, Gangotri, Kedarnath, Badrinath.", from: "₹ 24,999" },
+      { name: "Himachal Pradesh", slug: "himachal", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Manali, Shimla and the Spiti circuit.", from: "₹ 14,999" },
+      { name: "Char Dham Yatra", slug: "char-dham", image: img("photo-1609766418204-94aae0ecfdfc"), blurb: "Yamunotri, Gangotri, Kedarnath, Badrinath.", from: "₹ 24,999" },
+      { name: "Ladakh", slug: "ladakh", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Pangong Lake, Khardung La and Nubra Valley.", from: "₹ 27,499" },
+      { name: "Andaman & Nicobar", slug: "andaman", image: img("photo-1504214208698-ea1916a2195a"), blurb: "Crystal-clear seas and coral reefs.", from: "₹ 22,999" },
+      { name: "Uttarakhand", slug: "uttarakhand", image: img("photo-1547471080-7cc2caa01a7e"), blurb: "Rishikesh, Haridwar and Jim Corbett." },
+      { name: "Northeast India", slug: "northeast", image: img("photo-1516426122078-c23e76319801"), blurb: "Meghalaya, Assam & Sikkim — India's hidden gems." },
     ],
   },
   {
@@ -107,6 +112,8 @@ export const regions: { key: string; label: string; destinations: Dest[] }[] = [
       { name: "Russia", slug: "russia", image: img("photo-1513326738677-b964603b136d"), blurb: "Moscow & St. Petersburg heritage." },
       { name: "China", slug: "china", image: img("photo-1508804185872-d7badad00f7d"), blurb: "The Great Wall, Shanghai and Guilin." },
       { name: "South Korea", slug: "korea", image: img("photo-1538485399081-7191377e8241"), blurb: "Seoul, K-culture and Jeju island." },
+      { name: "Singapore & Malaysia", slug: "singapore-malaysia", image: img("photo-1525625293386-3f8f99389edd"), blurb: "Marina Bay, Langkawi and colonial Penang." },
+      { name: "Maldives", slug: "maldives", image: img("photo-1544551763-46a013bb70d5"), blurb: "Overwater villas and crystal lagoons.", from: "₹ 89,999" },
     ],
   },
   {
@@ -125,6 +132,7 @@ export const regions: { key: string; label: string; destinations: Dest[] }[] = [
       { name: "Greece", slug: "greece", image: img("photo-1503152394-c571994fd383"), blurb: "Santorini sunsets and Mykonos beaches." },
       { name: "Spain", slug: "spain", image: img("photo-1509840841025-9088ba78a826"), blurb: "Barcelona, Madrid and Andalusian charm." },
       { name: "Nordic (Denmark & Finland)", slug: "nordic", image: img("photo-1516815231560-8f41ec531527"), blurb: "Northern Lights and design capitals." },
+      { name: "Turkey", slug: "turkey", image: img("photo-1527838832700-5059252407fa"), blurb: "Istanbul, Cappadocia hot-air balloons." },
     ],
   },
   {
@@ -220,11 +228,11 @@ export const durations = [
 export const faqs = [
   {
     q: "How do I book a tour with Vinayak Tours & Travel?",
-    a: "Simply send an enquiry through our website, WhatsApp, or a call. Our travel designer will share a custom itinerary and quote — free of cost, with no advance payment required at the enquiry stage.",
+    a: "Simply send an enquiry through our website, WhatsApp, or a call. Our travel designer will share a custom itinerary and quote — at no extra cost. You only pay after you've approved the package.",
   },
   {
-    q: "Do I need to pay an advance to get a quote?",
-    a: "Not at all. Quotes and itinerary drafts are free. Payments are collected only after you confirm a package, and always through official invoices and secure channels.",
+    q: "Do I need to pay an advance to get an itinerary?",
+    a: "No. Itinerary drafts and consultations are at no extra charge. Payments are collected only after you confirm a package, and always through official invoices and secure channels.",
   },
   {
     q: "Do you handle visa and passport work?",
@@ -240,7 +248,7 @@ export const faqs = [
   },
   {
     q: "What support do I get during my trip?",
-    a: "24×7 WhatsApp support before, during and after the trip. Our team helps with reissues, upgrades, on-ground assistance and last-minute changes.",
+    a: "24×7 WhatsApp support before, during and after the trip. Don't ever feel alone at the airport, abroad, or at odd hours — our dedicated team is always available to assist you.",
   },
   {
     q: "Are your prices negotiable?",
@@ -249,6 +257,10 @@ export const faqs = [
   {
     q: "Do you offer corporate and MICE travel services?",
     a: "Yes. We manage corporate ticketing, offsites, incentive trips, conferences and exhibitions for organisations of every size — with consolidated billing and dedicated desks.",
+  },
+  {
+    q: "Do you offer fixed-departure group tours?",
+    a: "Yes! We have curated fixed-departure tours with the best economical itineraries — perfect for solo travellers and families who want to join a group. Check our Packages section for current departures.",
   },
 ];
 
@@ -263,16 +275,27 @@ export const galleryPhotos = [
   { src: galleryImg("photo-1537996194471-e657df975ab4"), alt: "Rice terraces in Bali, Indonesia", cat: "Nature" },
   { src: galleryImg("photo-1530122037265-a5f1f91d3b99"), alt: "Swiss Alps and Lake Interlaken", cat: "Europe" },
   { src: galleryImg("photo-1493976040374-85c8e12f0c0e"), alt: "Cherry blossoms in Japan", cat: "Asia" },
-  { src: galleryImg("photo-1516026672322-bc52d61a55d5"), alt: "Cape Town coastline, South Africa", cat: "Adventure" },
+  // Wildlife (was first Adventure)
+  { src: galleryImg("photo-1547471080-7cc2caa01a7e"), alt: "Masai Mara wildlife safari — Kenya", cat: "Wildlife" },
+  { src: galleryImg("photo-1516426122078-c23e76319801"), alt: "Serengeti wildlife and Kilimanjaro", cat: "Wildlife" },
+  { src: galleryImg("photo-1474511320723-9a56873867b5"), alt: "African lion on the savanna safari", cat: "Wildlife" },
+  // Trekking
+  { src: galleryImg("photo-1551632811-561732d1e306"), alt: "Himalayan trekking trail — Ladakh", cat: "Trekking" },
+  { src: galleryImg("photo-1526392060635-9d6019884377"), alt: "Machu Picchu trekking trail — Peru", cat: "Trekking" },
+  { src: galleryImg("photo-1534906028-5bd7b6b0e9fc"), alt: "Kilimanjaro summit trek — Tanzania", cat: "Trekking" },
+  // Cruises
+  { src: galleryImg("photo-1548445929-4f60a497f851"), alt: "Luxury ocean cruise ship at sea", cat: "Cruises" },
+  { src: galleryImg("photo-1580910365203-91500e8fa1e5"), alt: "Sri Lanka Cordelia cruise", cat: "Cruises" },
+  // Adventure (second — kept)
   { src: galleryImg("photo-1519832979-6fa011b87667"), alt: "Rocky Mountains, Canada", cat: "Adventure" },
   { src: galleryImg("photo-1526392060635-9d6019884377"), alt: "Machu Picchu in Peru", cat: "Heritage" },
   { src: galleryImg("photo-1551415923-a2297c7fda79"), alt: "Antarctic expedition ship near icebergs", cat: "Expeditions" },
 ];
 
 export const galleryLocalVideos = [
-  { src: "/africa video.mp4", title: "Africa safari & landscapes" },
-  { src: "/cruise video.mp4", title: "Ocean cruise experience" },
-  { src: "/cruise party video.mp4", title: "Cruise deck party" },
+  { src: "/africa video.mp4", title: "Africa Safari & Landscapes" },
+  { src: "/cruise video.mp4", title: "Ocean Cruise Experience" },
+  { src: "/cruise party video.mp4", title: "Cruise Deck Party" },
 ];
 
 export const galleryDeals = [
@@ -290,7 +313,7 @@ export const galleryDeals = [
   { src: "/unique hotels deal.jpeg", alt: "Kruger Shalati — a once-in-a-lifetime hotel experience, South Africa" },
 ];
 
-export type PackageCategory = "india" | "international" | "luxury" | "adventure";
+export type PackageCategory = "india" | "international" | "luxury" | "adventure" | "fixed";
 
 const initialPackages: {
   slug: string;
@@ -301,7 +324,10 @@ const initialPackages: {
   image: string;
   category: PackageCategory[];
   highlights: string[];
+  isFixed?: boolean;
+  departureDate?: string;
 }[] = [
+  // ── STANDARD PACKAGES ──
   {
     slug: "kashmir-classic",
     title: "Kashmir Classic",
@@ -338,7 +364,7 @@ const initialPackages: {
     region: "Yamunotri · Gangotri · Kedarnath · Badrinath",
     duration: "10N / 11D",
     from: "₹ 29,999",
-    image: galleryImg("photo-1567333567901-99f4feb2bbf9"),
+    image: galleryImg("photo-1609766418204-94aae0ecfdfc"),
     category: ["india"],
     highlights: ["Full spiritual circuit", "Escorted group tour", "Comfortable stays"],
   },
@@ -422,6 +448,73 @@ const initialPackages: {
     category: ["international", "adventure", "luxury"],
     highlights: ["Milford Sound cruise", "Bungee & jet-boat", "Hobbiton set tour"],
   },
+  // ── FIXED DEPARTURE PACKAGES ──
+  {
+    slug: "fixed-manali-group",
+    title: "Fixed Departure — Manali Group Tour",
+    region: "Delhi · Manali · Rohtang",
+    duration: "5N / 6D",
+    from: "₹ 11,999",
+    image: galleryImg("photo-1626621341517-bbf3d9990a23"),
+    category: ["india", "fixed"],
+    isFixed: true,
+    highlights: ["Group size 20–30 pax", "Rohtang pass excursion", "Solang Valley", "AC Volvo transfers"],
+  },
+  {
+    slug: "fixed-goa-bus",
+    title: "Fixed Departure — Goa Budget Bus Tour",
+    region: "Indore · Goa · Indore",
+    duration: "4N / 5D",
+    from: "₹ 8,999",
+    image: galleryImg("photo-1512343879784-a960bf40e7f2"),
+    category: ["india", "fixed"],
+    isFixed: true,
+    highlights: ["Sleeper bus both ways", "Calangute & Baga beaches", "Dudhsagar waterfall excursion", "Old Goa churches"],
+  },
+  {
+    slug: "fixed-rajasthan-winter",
+    title: "Fixed Departure — Rajasthan Winter Special",
+    region: "Jaipur · Jodhpur · Jaisalmer · Udaipur",
+    duration: "7N / 8D",
+    from: "₹ 17,999",
+    image: galleryImg("photo-1477587458883-47145ed94245"),
+    category: ["india", "fixed"],
+    isFixed: true,
+    highlights: ["Guided heritage walks", "Desert camp night stay", "Camel safari", "Pushkar fair (seasonal)"],
+  },
+  {
+    slug: "fixed-chardham-bus",
+    title: "Fixed Departure — Char Dham Yatra by Bus",
+    region: "Haridwar · Yamunotri · Gangotri · Kedarnath · Badrinath",
+    duration: "12N / 13D",
+    from: "₹ 19,999",
+    image: galleryImg("photo-1609766418204-94aae0ecfdfc"),
+    category: ["india", "fixed"],
+    isFixed: true,
+    highlights: ["Fully escorted group", "All 4 dhams covered", "Budget guesthouse stays", "Priest services included"],
+  },
+  {
+    slug: "fixed-thailand-group",
+    title: "Fixed Departure — Thailand Group Tour",
+    region: "Bangkok · Pattaya · Phuket",
+    duration: "6N / 7D",
+    from: "₹ 34,999",
+    image: galleryImg("photo-1552465011-b4e21bf6e79a"),
+    category: ["international", "fixed"],
+    isFixed: true,
+    highlights: ["Return flights included", "Coral island boat trip", "Alcazar cabaret show", "Phi Phi island tour"],
+  },
+  {
+    slug: "fixed-dubai-group",
+    title: "Fixed Departure — Dubai Group Package",
+    region: "Dubai · Abu Dhabi",
+    duration: "5N / 6D",
+    from: "₹ 42,999",
+    image: galleryImg("photo-1512453979798-5ea266f8880c"),
+    category: ["international", "fixed"],
+    isFixed: true,
+    highlights: ["Return flights + visa", "Desert safari with BBQ dinner", "Burj Khalifa (124th floor)", "Abu Dhabi city tour"],
+  },
 ];
 
 export const packages = getSaved("vtt_packages", initialPackages);
@@ -431,5 +524,5 @@ export const packageCategories: { key: PackageCategory; label: string; desc: str
   { key: "international", label: "International", desc: "50+ countries — visas, flights and stays handled end to end." },
   { key: "luxury", label: "Luxury", desc: "5-star stays, private guides and premium ground handling." },
   { key: "adventure", label: "Adventure", desc: "Treks, expeditions and once-in-a-lifetime experiences." },
+  { key: "fixed", label: "Fixed Departures", desc: "Best & economical group itineraries with set departure dates." },
 ];
-

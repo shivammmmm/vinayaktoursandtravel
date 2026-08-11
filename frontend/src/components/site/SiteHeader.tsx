@@ -27,6 +27,7 @@ const nav: NavItem[] = [
     children: [
       { to: "/about", hash: "profile", label: "Company Profile", desc: "Our story since 2014" },
       { to: "/about", hash: "leadership", label: "Leadership", desc: "Meet the team" },
+      { to: "/about", hash: "group-of-companies", label: "Group of Companies", desc: "4 sister businesses" },
       { to: "/about", hash: "offices", label: "Our Offices", desc: "Indore & Chandigarh" },
     ],
   },
