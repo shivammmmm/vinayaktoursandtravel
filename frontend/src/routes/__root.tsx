@@ -111,11 +111,47 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "Vinayak Tours & Travel",
+  "url": "https://vinayaktoursandtravel.com",
+  "logo": "https://vinayaktoursandtravel.com/logo.jpg",
+  "image": "https://vinayaktoursandtravel.com/office-indore.png",
+  "description": "Single stop shop for all your travel needs — domestic & international tours, honeymoon, MICE, cruises, flights, visas. From budget to luxury, solo to corporate. Offices in Indore & Chandigarh.",
+  "foundingDate": "2014",
+  "areaServed": "Worldwide",
+  "telephone": ["+91-93006-55686", "+91-90391-39194"],
+  "email": "vinayakindore2000@gmail.com",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "103, TREASURE VIHAR, Bijalpur",
+      "addressLocality": "Indore",
+      "addressRegion": "Madhya Pradesh",
+      "addressCountry": "IN"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "238, Airport Road, Manali Highway",
+      "addressLocality": "Chandigarh",
+      "addressRegion": "Chandigarh",
+      "addressCountry": "IN"
+    }
+  ],
+  "openingHours": "Mo-Su 00:00-24:00",
+  "sameAs": ["https://www.youtube.com/@vinayaktoursntravel"]
+});
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" itemScope itemType="https://schema.org/WebPage">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON_LD }}
+        />
       </head>
       <body>
         {children}

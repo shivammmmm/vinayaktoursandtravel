@@ -92,7 +92,7 @@ export const regions: { key: string; label: string; destinations: Dest[] }[] = [
       { name: "Rajasthan", slug: "rajasthan", image: img("photo-1477587458883-47145ed94245"), blurb: "Forts, palaces and desert nights.", from: "₹ 16,999" },
       { name: "Kashmir", slug: "kashmir", image: img("photo-1566837945700-30057527ade0"), blurb: "Shikaras on Dal Lake and snowy Gulmarg.", from: "₹ 21,499" },
       { name: "Himachal Pradesh", slug: "himachal", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Manali, Shimla and the Spiti circuit.", from: "₹ 14,999" },
-      { name: "Char Dham Yatra", slug: "char-dham", image: img("photo-1609766418204-94aae0ecfdfc"), blurb: "Yamunotri, Gangotri, Kedarnath, Badrinath.", from: "₹ 24,999" },
+      { name: "Char Dham Yatra", slug: "char-dham", image: img("photo-1582510003544-4d00b7f74220"), blurb: "Yamunotri, Gangotri, Kedarnath, Badrinath.", from: "₹ 24,999" },
       { name: "Ladakh", slug: "ladakh", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Pangong Lake, Khardung La and Nubra Valley.", from: "₹ 27,499" },
       { name: "Andaman & Nicobar", slug: "andaman", image: img("photo-1504214208698-ea1916a2195a"), blurb: "Crystal-clear seas and coral reefs.", from: "₹ 22,999" },
       { name: "Uttarakhand", slug: "uttarakhand", image: img("photo-1547471080-7cc2caa01a7e"), blurb: "Rishikesh, Haridwar and Jim Corbett." },
