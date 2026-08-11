@@ -62,7 +62,7 @@ export function SiteFooter() {
             <li><Link to="/themes" className="hover:text-accent transition-colors">Trip Themes</Link></li>
             <li><Link to="/destinations" className="hover:text-accent transition-colors">Prime Destinations</Link></li>
             <li><Link to="/gallery" className="hover:text-accent transition-colors">Gallery</Link></li>
-            <li><Link to="/booking" className="hover:text-accent transition-colors">Get Custom Quote</Link></li>
+            <li><Link to="/booking" className="hover:text-accent transition-colors">Plan Your Tour</Link></li>
           </ul>
         </div>
 

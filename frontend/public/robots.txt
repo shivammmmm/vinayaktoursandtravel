@@ -1,2 +1,11 @@
 User-agent: *
 Allow: /
+
+# Block admin from indexing
+Disallow: /admin
+
+# Preferred domain
+Host: vinayaktoursandtravel.com
+
+# Sitemap location
+Sitemap: https://vinayaktoursandtravel.com/sitemap.xml
