@@ -25,39 +25,39 @@ const whyIcons = [Star, Wallet, MapPin, Globe2, ShieldCheck, Headphones];
 
 const heroSlides = [
   {
+    image: "/bali.jpeg",
+    destination: "Bali — Bedugul & Tanah Lot",
+    eyebrow: "Tropical Escapes",
+    title: "Rice Terraces & Beach Escapes in Bali",
+    tagline: "5 Nights packages from ₹29,999 · Bedugul, Tanah Lot sunset, ATV & Nusa Penida.",
+  },
+  {
+    image: "/chennai cruise.jpeg",
+    destination: "Cordelia Cruises — High Seas Voyage",
+    eyebrow: "Luxury Ocean Cruise",
+    title: "Unforgettable Ocean Sailing on Cordelia Cruises",
+    tagline: "Exclusive deals from ₹34,843 · 2 nights ocean sailing, gourmet dining & deck party.",
+  },
+  {
     image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1800&q=80",
     destination: "Kashmir — Dal Lake & Gulmarg",
     eyebrow: "Paradise on Earth",
     title: "Chasing Snow & Serenity in Kashmir",
-    tagline: "Custom packages from ₹21,499 · Shikara rides, gondola tickets, houseboats & private drivers.",
+    tagline: "Custom packages from ₹21,499 · Shikara rides, Gondola tickets, houseboats & private drivers.",
   },
   {
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1800&q=80",
-    destination: "Bali — Ubud & Nusa Dua",
-    eyebrow: "Tropical Escapes",
-    title: "Rice Terraces & Private Pool Villas in Bali",
-    tagline: "Custom packages from ₹44,999 · Flights, private transfers, candlelight dinners included.",
+    image: "/Turkey.jpeg",
+    destination: "Turkey — Istanbul & Cappadocia",
+    eyebrow: "Grand Discovery",
+    title: "Hot Air Balloons & Bosphorus Nights in Turkey",
+    tagline: "10 Nights package from ₹98,500 · Cappadocia ballooning, Pamukkale & Istanbul.",
   },
   {
-    image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1800&q=80",
-    destination: "Switzerland — Interlaken & Jungfrau",
-    eyebrow: "Alpine Wonders",
-    title: "Scenic Rail & Mountain Peaks in Switzerland",
-    tagline: "Custom packages from ₹1,49,999 · Swiss Travel Pass, Jungfraujoch & lake cruises.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=80",
-    destination: "Dubai — Skyline & Desert Safari",
-    eyebrow: "Luxury & Glamour",
-    title: "Burj Khalifa & Golden Sand Safaris in Dubai",
-    tagline: "Custom packages from ₹39,999 · Express visa, 5-star hotels & dune bashing.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1800&q=80",
-    destination: "Kerala — Munnar & Alleppey",
-    eyebrow: "God's Own Country",
-    title: "Tranquil Backwaters & Tea Gardens in Kerala",
-    tagline: "Custom packages from ₹18,499 · Luxury houseboat stay, spice plantation & beach resorts.",
+    image: "/chardham-yatra-custom.jpg",
+    destination: "Char Dham Yatra — Uttarakhand",
+    eyebrow: "Spiritual Yatra",
+    title: "Yamunotri, Gangotri, Kedarnath & Badrinath",
+    tagline: "Complete Yatra packages from ₹19,999 · Escorted group tours & comfortable stays.",
   },
 ];
 
@@ -637,8 +637,19 @@ function Home() {
                 </div>
 
                 <div className="p-6 pt-0 flex gap-2">
-                  <Button asChild size="sm" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-extrabold">
+                  <Button asChild size="sm" className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 font-extrabold">
                     <Link to="/booking" search={{ destination: p.title }}>Plan This Trip</Link>
+                  </Button>
+                  <Button asChild size="sm" variant="outline" className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white font-bold">
+                    <a
+                      href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
+                        `Hi Vinayak Tours, I am interested in the package: ${p.title} (${p.from}). Please send details.`
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <MessageCircle className="h-4 w-4 mr-1 shrink-0" /> WhatsApp
+                    </a>
                   </Button>
                 </div>
               </article>

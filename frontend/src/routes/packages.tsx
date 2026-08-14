@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import { PageHero, Section } from "@/components/site/PageHero";
-import { packages, packageCategories, type PackageCategory } from "@/lib/site-data";
+import { packages, packageCategories, brand, type PackageCategory } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Check, Calendar, MessageCircle, ExternalLink } from "lucide-react";
 
@@ -98,43 +98,57 @@ function PackagesPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {list.map((p) => (
-            <article key={p.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-primary shadow">
-                  From {p.from}
+          {list.map((p) => {
+            const waLink = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
+              `Hi Vinayak Tours, I am interested in the package offer: ${p.title} (${p.from}). Please send me the complete itinerary and departure details.`
+            )}`;
+            return (
+              <article key={p.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-brand transition-shadow duration-300">
+                <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute left-3 top-3 flex flex-col gap-1 z-10">
+                    <div className="rounded-full bg-accent px-3 py-1 text-xs font-extrabold text-accent-foreground shadow-md backdrop-blur-md">
+                      From {p.from}
+                    </div>
+                    {p.isFixed && (
+                      <div className="rounded-full bg-emerald-600 px-3 py-0.5 text-[11px] font-bold text-white shadow">
+                        Fixed Departure
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="text-lg font-bold">{p.title}</h3>
-                <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                  <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {p.region}</span>
-                  <span className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {p.duration}</span>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="text-lg font-extrabold text-foreground group-hover:text-accent transition-colors">{p.title}</h3>
+                  <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1 font-medium"><MapPin className="h-3.5 w-3.5 text-accent" /> {p.region}</span>
+                    <span className="inline-flex items-center gap-1 font-medium"><Clock className="h-3.5 w-3.5 text-accent" /> {p.duration}</span>
+                  </div>
+                  <ul className="mt-4 flex-1 space-y-1.5 text-sm text-foreground/80">
+                    {p.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {h}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 flex gap-2 pt-2 border-t border-border">
+                    <Button asChild size="sm" className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
+                      <Link to="/booking" search={{ destination: p.title }}>Plan This Trip</Link>
+                    </Button>
+                    <Button asChild size="sm" variant="outline" className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white font-bold">
+                      <a href={waLink} target="_blank" rel="noreferrer" title="Chat on WhatsApp">
+                        <MessageCircle className="h-4 w-4 mr-1 shrink-0" /> WhatsApp
+                      </a>
+                    </Button>
+                  </div>
                 </div>
-                <ul className="mt-4 space-y-1.5 text-sm text-foreground/80">
-                  {p.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {h}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-5 flex gap-2">
-                  <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                    <Link to="/booking" search={{ destination: p.title }}>Plan This Trip</Link>
-                  </Button>
-                  <Button asChild size="sm" variant="outline">
-                    <Link to="/contact">Talk to us</Link>
-                  </Button>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </Section>
     </div>
