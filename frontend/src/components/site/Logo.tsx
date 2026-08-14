@@ -13,7 +13,7 @@ export function Logo({ className = "h-14 w-auto" }: LogoProps) {
     return (
       <div className="flex items-center gap-3">
         <img
-          src="/logo.png"
+          src="/logo.jpg"
           alt="Vinayak Tours & Travel Logo"
           onError={() => setImgError(true)}
           className={`${className} object-contain rounded-xl shadow-sm border border-border/40`}
