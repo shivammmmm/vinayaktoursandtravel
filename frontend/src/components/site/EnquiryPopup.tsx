@@ -46,7 +46,7 @@ export function EnquiryPopup() {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Get a free trip quote</DialogTitle>
+          <DialogTitle className="text-2xl">Plan Your Tour</DialogTitle>
           <DialogDescription>
             Tell us where you'd like to go — we'll design a tailor-made itinerary within your budget.
           </DialogDescription>

@@ -270,23 +270,27 @@ export const galleryPhotos = [
   { src: galleryImg("photo-1512343879784-a960bf40e7f2"), alt: "Palm-fringed beach in Goa at sunset", cat: "Beaches" },
   { src: galleryImg("photo-1602216056096-3b40cc0c9944"), alt: "Kerala backwater houseboat at dawn", cat: "Backwaters" },
   { src: galleryImg("photo-1477587458883-47145ed94245"), alt: "Rajasthan fort at golden hour", cat: "Heritage" },
-  { src: galleryImg("photo-1566837945700-30057527ade0"), alt: "Shikara boat on Dal Lake, Kashmir", cat: "Mountains" },
+  // Mountains — proper Himalayan / mountain photos
+  { src: galleryImg("photo-1585409677983-0f6c41ca9c3b"), alt: "Snow-capped Himalayan peaks at sunrise", cat: "Mountains" },
+  { src: galleryImg("photo-1464822759023-fed622ff2c3b"), alt: "Mountain range with dramatic clouds", cat: "Mountains" },
+  { src: galleryImg("photo-1506905925346-21bda4d32df4"), alt: "Alpine mountain lake with reflections", cat: "Mountains" },
   { src: galleryImg("photo-1512453979798-5ea266f8880c"), alt: "Dubai skyline with Burj Khalifa", cat: "Cityscapes" },
   { src: galleryImg("photo-1537996194471-e657df975ab4"), alt: "Rice terraces in Bali, Indonesia", cat: "Nature" },
   { src: galleryImg("photo-1530122037265-a5f1f91d3b99"), alt: "Swiss Alps and Lake Interlaken", cat: "Europe" },
   { src: galleryImg("photo-1493976040374-85c8e12f0c0e"), alt: "Cherry blossoms in Japan", cat: "Asia" },
-  // Wildlife (was first Adventure)
+  // Wildlife
   { src: galleryImg("photo-1547471080-7cc2caa01a7e"), alt: "Masai Mara wildlife safari — Kenya", cat: "Wildlife" },
   { src: galleryImg("photo-1516426122078-c23e76319801"), alt: "Serengeti wildlife and Kilimanjaro", cat: "Wildlife" },
   { src: galleryImg("photo-1474511320723-9a56873867b5"), alt: "African lion on the savanna safari", cat: "Wildlife" },
-  // Trekking
-  { src: galleryImg("photo-1551632811-561732d1e306"), alt: "Himalayan trekking trail — Ladakh", cat: "Trekking" },
-  { src: galleryImg("photo-1526392060635-9d6019884377"), alt: "Machu Picchu trekking trail — Peru", cat: "Trekking" },
-  { src: galleryImg("photo-1534906028-5bd7b6b0e9fc"), alt: "Kilimanjaro summit trek — Tanzania", cat: "Trekking" },
-  // Cruises
-  { src: galleryImg("photo-1548445929-4f60a497f851"), alt: "Luxury ocean cruise ship at sea", cat: "Cruises" },
-  { src: galleryImg("photo-1580910365203-91500e8fa1e5"), alt: "Sri Lanka Cordelia cruise", cat: "Cruises" },
-  // Adventure (second — kept)
+  // Trekking — proper trekking/hiking trail photos
+  { src: galleryImg("photo-1551632811-561732d1e306"), alt: "Trekkers on a mountain trail with backpacks", cat: "Trekking" },
+  { src: galleryImg("photo-1533240332313-0db49b459ad6"), alt: "Hikers trekking through green valley trail", cat: "Trekking" },
+  { src: galleryImg("photo-1501555088652-021faa106b9b"), alt: "Trekking group with poles on mountain ridge", cat: "Trekking" },
+  // Cruises — proper cruise ship photos
+  { src: galleryImg("photo-1548574505-5e239809ee19"), alt: "Large cruise ship sailing on open ocean", cat: "Cruises" },
+  { src: galleryImg("photo-1599640842225-85d111c60e6b"), alt: "Luxury cruise ship deck at sunset", cat: "Cruises" },
+  { src: galleryImg("photo-1580541631950-7282082b53ce"), alt: "Cruise ship docked at tropical port", cat: "Cruises" },
+  // Adventure
   { src: galleryImg("photo-1519832979-6fa011b87667"), alt: "Rocky Mountains, Canada", cat: "Adventure" },
   { src: galleryImg("photo-1526392060635-9d6019884377"), alt: "Machu Picchu in Peru", cat: "Heritage" },
   { src: galleryImg("photo-1551415923-a2297c7fda79"), alt: "Antarctic expedition ship near icebergs", cat: "Expeditions" },

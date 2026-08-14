@@ -15,7 +15,7 @@ export const Route = createFileRoute("/packages")({
   head: () => ({
     meta: [
       { title: "Tour Packages — India, International, Luxury & Adventure | Vinayak" },
-      { name: "description", content: "Handpicked domestic and international tour packages — Kashmir, Kerala, Rajasthan, Dubai, Bali, Switzerland, Maldives and more. Free itineraries, no advance." },
+      { name: "description", content: "Handpicked domestic and international tour packages — Kashmir, Kerala, Rajasthan, Dubai, Bali, Switzerland, Maldives and more. Skip the planning stress, we'll build the journey." },
       { name: "keywords", content: "budget tour, budget travel, travel plan, tour package, honeymoon, holiday packages, custom packages, luxury packages, adventure packages, domestic tours, international tours" },
       { property: "og:title", content: "Tour Packages | Vinayak Tours & Travel" },
       { property: "og:description", content: "Browse India, International, Luxury and Adventure holiday packages." },
