@@ -41,7 +41,7 @@ const initialBrand = {
   ],
 };
 
-export const brand = getSaved("vtt_brand", initialBrand);
+export const brand = initialBrand;
 
 export const officePhotos = {
   building: "/office-indore.png",
@@ -90,10 +90,10 @@ export const regions: { key: string; label: string; destinations: Dest[] }[] = [
       { name: "Goa", slug: "goa", image: img("photo-1512343879784-a960bf40e7f2"), blurb: "Beaches, sunsets and Portuguese charm.", from: "₹ 12,999" },
       { name: "Kerala", slug: "kerala", image: img("photo-1602216056096-3b40cc0c9944"), blurb: "Backwaters, houseboats and hill stations.", from: "₹ 18,499" },
       { name: "Rajasthan", slug: "rajasthan", image: img("photo-1477587458883-47145ed94245"), blurb: "Forts, palaces and desert nights.", from: "₹ 16,999" },
-      { name: "Kashmir", slug: "kashmir", image: img("photo-1566837945700-30057527ade0"), blurb: "Shikaras on Dal Lake and snowy Gulmarg.", from: "₹ 21,499" },
+      { name: "Kashmir", slug: "kashmir", image: img("photo-1595815771614-ade9d652a65d"), blurb: "Shikaras on Dal Lake and snowy Gulmarg.", from: "₹ 21,499" },
       { name: "Himachal Pradesh", slug: "himachal", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Manali, Shimla and the Spiti circuit.", from: "₹ 14,999" },
-      { name: "Char Dham Yatra", slug: "char-dham", image: img("photo-1582510003544-4d00b7f74220"), blurb: "Yamunotri, Gangotri, Kedarnath, Badrinath.", from: "₹ 24,999" },
-      { name: "Ladakh", slug: "ladakh", image: img("photo-1626621341517-bbf3d9990a23"), blurb: "Pangong Lake, Khardung La and Nubra Valley.", from: "₹ 27,499" },
+      { name: "Char Dham Yatra", slug: "char-dham", image: img("photo-1626714424372-1f088c811568"), blurb: "Yamunotri, Gangotri, Kedarnath, Badrinath.", from: "₹ 24,999" },
+      { name: "Ladakh", slug: "ladakh", image: img("photo-1581793745862-99fde7fa73d2"), blurb: "Pangong Lake, Khardung La and Nubra Valley.", from: "₹ 27,499" },
       { name: "Andaman & Nicobar", slug: "andaman", image: img("photo-1504214208698-ea1916a2195a"), blurb: "Crystal-clear seas and coral reefs.", from: "₹ 22,999" },
       { name: "Uttarakhand", slug: "uttarakhand", image: img("photo-1547471080-7cc2caa01a7e"), blurb: "Rishikesh, Haridwar and Jim Corbett." },
       { name: "Northeast India", slug: "northeast", image: img("photo-1516426122078-c23e76319801"), blurb: "Meghalaya, Assam & Sikkim — India's hidden gems." },
@@ -198,7 +198,7 @@ const initialTestimonials = [
   { name: "Mr. Mahendra Singh", role: "Auto Engineering Ltd", quote: "Reliable and fast response times. They manage all our flight reissues and travel logistics flawlessly." }
 ];
 
-export const testimonials = getSaved("vtt_testimonials", initialTestimonials);
+export const testimonials = initialTestimonials;
 
 export const corporateClients = [
   "Force Motors", "Shubham Group", "VE Commercial Vehicles Ltd.",
@@ -338,7 +338,7 @@ const initialPackages: {
     region: "Srinagar · Gulmarg · Pahalgam",
     duration: "6N / 7D",
     from: "₹ 21,499",
-    image: galleryImg("photo-1566837945700-30057527ade0"),
+    image: galleryImg("photo-1595815771614-ade9d652a65d"),
     category: ["india"],
     highlights: ["Dal Lake shikara ride", "Gulmarg Gondola", "Betaab Valley excursion"],
   },
@@ -368,7 +368,7 @@ const initialPackages: {
     region: "Yamunotri · Gangotri · Kedarnath · Badrinath",
     duration: "10N / 11D",
     from: "₹ 29,999",
-    image: galleryImg("photo-1609766418204-94aae0ecfdfc"),
+    image: galleryImg("photo-1626714424372-1f088c811568"),
     category: ["india"],
     highlights: ["Full spiritual circuit", "Escorted group tour", "Comfortable stays"],
   },
@@ -418,7 +418,7 @@ const initialPackages: {
     region: "Leh · Nubra · Pangong",
     duration: "7N / 8D",
     from: "₹ 27,499",
-    image: galleryImg("photo-1626621341517-bbf3d9990a23"),
+    image: galleryImg("photo-1581793745862-99fde7fa73d2"),
     category: ["india", "adventure"],
     highlights: ["Khardung La pass", "Pangong Lake camp", "Nubra dunes"],
   },
@@ -492,7 +492,7 @@ const initialPackages: {
     region: "Haridwar · Yamunotri · Gangotri · Kedarnath · Badrinath",
     duration: "12N / 13D",
     from: "₹ 19,999",
-    image: galleryImg("photo-1609766418204-94aae0ecfdfc"),
+    image: galleryImg("photo-1626714424372-1f088c811568"),
     category: ["india", "fixed"],
     isFixed: true,
     highlights: ["Fully escorted group", "All 4 dhams covered", "Budget guesthouse stays", "Priest services included"],
@@ -521,7 +521,7 @@ const initialPackages: {
   },
 ];
 
-export const packages = getSaved("vtt_packages", initialPackages);
+export const packages = initialPackages;
 
 export const packageCategories: { key: PackageCategory; label: string; desc: string }[] = [
   { key: "india", label: "India", desc: "Handpicked domestic escapes from the Himalayas to the coasts." },
