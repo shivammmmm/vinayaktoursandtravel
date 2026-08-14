@@ -25,11 +25,11 @@ const whyIcons = [Star, Wallet, MapPin, Globe2, ShieldCheck, Headphones];
 
 const heroSlides = [
   {
-    image: "/bali.jpeg",
-    destination: "Bali — Bedugul & Tanah Lot",
-    eyebrow: "Tropical Escapes",
-    title: "Rice Terraces & Beach Escapes in Bali",
-    tagline: "5 Nights packages from ₹29,999 · Bedugul, Tanah Lot sunset, ATV & Nusa Penida.",
+    image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1800&q=80",
+    destination: "Kashmir — Dal Lake & Gulmarg",
+    eyebrow: "Paradise on Earth",
+    title: "Chasing Snow & Serenity in Kashmir",
+    tagline: "Custom packages from ₹21,499 · Shikara rides, gondola tickets, houseboats & private drivers.",
   },
   {
     image: "/chennai cruise.jpeg",
