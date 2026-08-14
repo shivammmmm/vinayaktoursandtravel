@@ -4,7 +4,7 @@ import { z } from "zod";
 import { PageHero, Section } from "@/components/site/PageHero";
 import { packages, packageCategories, type PackageCategory } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, Check, Calendar } from "lucide-react";
+import { MapPin, Clock, Check, Calendar, MessageCircle, ExternalLink } from "lucide-react";
 
 const packagesSearchSchema = z.object({
   category: z.string().optional(),
@@ -74,6 +74,27 @@ function PackagesPage() {
               {c.label}
             </button>
           ))}
+        </div>
+
+        {/* WhatsApp Live Catalog Banner */}
+        <div className="mb-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-emerald-600 text-white shadow-md">
+              <MessageCircle className="h-6 w-6" />
+            </div>
+            <div>
+              <h3 className="font-bold text-base md:text-lg text-foreground">Explore Our Live WhatsApp Catalog</h3>
+              <p className="text-xs md:text-sm text-muted-foreground">View fixed departure dates, latest rates, and daily updated itineraries directly on our WhatsApp Business catalog.</p>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/c/919039139194"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white shadow hover:bg-emerald-700 shrink-0 transition"
+          >
+            Open WhatsApp Catalog <ExternalLink className="h-4 w-4" />
+          </a>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
