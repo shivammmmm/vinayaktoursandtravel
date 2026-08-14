@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { MapPin, Star, ArrowRight } from "lucide-react";
+
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=70";
 
 export function DestinationCard({
   name,
@@ -14,16 +17,19 @@ export function DestinationCard({
   blurb: string;
   from?: string;
 }) {
+  const [imgSrc, setImgSrc] = useState(image);
+
   return (
     <Link
       to="/booking"
       search={{ destination: name }}
-      className="group relative flex h-80 flex-col justify-end overflow-hidden rounded-3xl border border-white/20 shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:shadow-brand"
+      className="group relative flex h-80 flex-col justify-end overflow-hidden rounded-3xl border border-white/20 shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:shadow-brand bg-slate-900"
     >
       <img
-        src={image}
+        src={imgSrc}
         alt={name}
         loading="lazy"
+        onError={() => setImgSrc(FALLBACK_IMAGE)}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
       />
       
