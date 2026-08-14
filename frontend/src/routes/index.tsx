@@ -359,8 +359,9 @@ function Home() {
                   <Search className="mr-2 h-4 w-4" /> Plan My Journey
                 </Button>
 
-                <p className="text-center text-[11px] text-muted-foreground font-medium">
-                  🔒 No advance required · Custom itinerary at no extra cost
+                <p className="text-center text-[11px] text-muted-foreground font-medium leading-relaxed">
+                  Skip the planning stress. Tell us your needs, we'll build the journey.<br />
+                  Your custom itinerary is just one conversation away.
                 </p>
               </form>
             </div>

@@ -49,7 +49,7 @@ export function FloatingContactBar() {
       const cleanOpt = option.toLowerCase();
 
       if (cleanOpt.includes("plan") || cleanOpt.includes("trip")) {
-        replyText = "We design fully customized tour packages for families, couples, groups, and solo travelers covering 50+ countries plus Kashmir, Kerala, Goa, Himachal, and Char Dham Yatra. Free itinerary design!";
+        replyText = "We design fully customized tour packages for families, couples, groups, and solo travelers covering 50+ countries plus Kashmir, Kerala, Goa, Himachal, and Char Dham Yatra. Your custom itinerary is just one conversation away!";
         replyOptions = ["Go to Booking Form", "Plan on WhatsApp", "Back to main menu"];
       } else if (cleanOpt.includes("visa") || cleanOpt.includes("passport")) {
         replyText = "We offer end-to-end tourist & business visa consultation (documentation, appointment slots, interview prep) for US, UK, Schengen, UAE, Thailand, Bali and more.";
