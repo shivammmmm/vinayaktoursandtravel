@@ -121,24 +121,34 @@ function About() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {/* Building photo with VINAYAK overlay */}
-              <div className="relative col-span-2 h-64 w-full overflow-hidden rounded-2xl shadow-card">
-                <img
-                  src={officePhotos.building}
-                  alt="Vinayak Tours & Travel Head Office Building, Indore"
-                  className="h-full w-full object-cover"
-                />
-                {/* Overlay to brand the building */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-center">
-                  <div className="inline-block rounded-xl bg-accent px-4 py-1.5 text-sm font-black text-accent-foreground shadow-lg tracking-wide">
-                    VINAYAK TOURS & TRAVEL
-                  </div>
-                  <p className="mt-1 text-xs text-white/80">103, TREASURE VIHAR, Bijalpur, Indore (M.P.)</p>
+              <div className="relative h-48 w-full overflow-hidden rounded-2xl shadow-card">
+                <img src={officePhotos.building} alt="Vinayak Indore HQ" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2 text-white">
+                  <span className="text-[10px] font-bold bg-accent text-accent-foreground px-2 py-0.5 rounded">Indore HQ Building</span>
                 </div>
               </div>
-              <img src={officePhotos.lounge} alt="Reception lounge" className="h-40 w-full rounded-2xl object-cover shadow-card" />
-              <img src={officePhotos.workstations} alt="Chandigarh office workstations" className="h-40 w-full rounded-2xl object-cover shadow-card" />
+              <div className="relative h-48 w-full overflow-hidden rounded-2xl shadow-card">
+                <img src="/office-modern.png" alt="Vinayak Corporate Building" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2 text-white">
+                  <span className="text-[10px] font-bold bg-accent text-accent-foreground px-2 py-0.5 rounded">Corporate Showcase</span>
+                </div>
+              </div>
+              <div className="relative h-40 w-full overflow-hidden rounded-2xl shadow-card">
+                <img src={officePhotos.lounge} alt="Reception Lounge" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2 text-white">
+                  <span className="text-[10px] font-bold bg-black/50 px-2 py-0.5 rounded">Guest Lounge</span>
+                </div>
+              </div>
+              <div className="relative h-40 w-full overflow-hidden rounded-2xl shadow-card">
+                <img src={officePhotos.workstations} alt="Chandigarh Workstations" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2 text-white">
+                  <span className="text-[10px] font-bold bg-black/50 px-2 py-0.5 rounded">Chandigarh Branch</span>
+                </div>
+              </div>
             </div>
           </div>
         </Section>

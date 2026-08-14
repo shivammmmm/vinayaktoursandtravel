@@ -146,7 +146,7 @@ function Booking() {
       <PageHero
         eyebrow="Plan your trip"
         title="Your custom itinerary is just one conversation away"
-        subtitle="Skip the planning stress. Tell us your needs — we'll build the journey. No advance payment required."
+        subtitle="Skip the planning stress. Tell us your needs, we'll build the journey."
       />
 
       <Section>
