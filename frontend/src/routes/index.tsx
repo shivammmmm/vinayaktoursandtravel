@@ -421,19 +421,24 @@ function Home() {
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
           {/* Photos grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="group relative overflow-hidden rounded-3xl col-span-2 aspect-[16/9] shadow-card">
-              <img src={officePhotos.building} alt="Vinayak Tours & Travel Head Office Building" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div className="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card">
+              <img src={officePhotos.building} alt="Vinayak Tours & Travel Indore HQ" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 text-white">
-                <div className="rounded-xl bg-accent px-3 py-1.5 text-xs font-black text-accent-foreground inline-block mb-1">
-                  VINAYAK TOURS & TRAVEL
-                </div>
-                <p className="text-xs text-white/90">103, TREASURE VIHAR, Bijalpur, Indore (M.P.)</p>
+              <div className="absolute bottom-3 left-3 text-white">
+                <span className="rounded-full bg-white/20 backdrop-blur px-2.5 py-0.5 text-[10px] font-bold">Indore HQ Office</span>
               </div>
             </div>
 
             <div className="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card">
-              <img src={officePhotos.workstations} alt="Chandigarh Office" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src="/office-modern.png" alt="Vinayak Corporate Showcase" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 text-white">
+                <span className="rounded-full bg-white/20 backdrop-blur px-2.5 py-0.5 text-[10px] font-bold">Corporate Showcase</span>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card">
+              <img src={officePhotos.workstations} alt="Chandigarh Branch Workstations" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 text-white">
                 <span className="rounded-full bg-white/20 backdrop-blur px-2.5 py-0.5 text-[10px] font-bold">Chandigarh Branch</span>
@@ -441,7 +446,7 @@ function Home() {
             </div>
 
             <div className="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card">
-              <img src={officePhotos.lounge} alt="Reception Lounge" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={officePhotos.lounge} alt="Guest Lounge & Support Desk" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 text-white">
                 <span className="rounded-full bg-white/20 backdrop-blur px-2.5 py-0.5 text-[10px] font-bold">Guest Lounge</span>

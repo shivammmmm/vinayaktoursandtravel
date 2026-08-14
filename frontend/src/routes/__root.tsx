@@ -116,7 +116,7 @@ const JSON_LD = JSON.stringify({
   "@type": "TravelAgency",
   "name": "Vinayak Tours & Travel",
   "url": "https://vinayaktoursandtravel.com",
-  "logo": "https://vinayaktoursandtravel.com/logo.jpg",
+  "logo": "https://vinayaktoursandtravel.com/logo.png",
   "image": "https://vinayaktoursandtravel.com/office-indore.png",
   "description": "Single stop shop for all your travel needs — domestic & international tours, honeymoon, MICE, cruises, flights, visas. From budget to luxury, solo to corporate. Offices in Indore & Chandigarh.",
   "foundingDate": "2014",
