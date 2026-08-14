@@ -55,7 +55,7 @@ function Sitemap() {
                   <ul className="space-y-1 pl-2 border-l border-border/80">
                     {r.destinations.map((d) => (
                       <li key={d.slug}>
-                        <Link to={`/booking?destination=${encodeURIComponent(d.name)}`} className="hover:text-accent text-xs block py-0.5">{d.name}</Link>
+                        <Link to="/booking" search={{ destination: d.name }} className="hover:text-accent text-xs block py-0.5">{d.name}</Link>
                       </li>
                     ))}
                   </ul>
@@ -72,7 +72,7 @@ function Sitemap() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               {themes.map((t) => (
                 <li key={t}>
-                  <Link to={`/booking?destination=${encodeURIComponent(`${t} — India`)}`} className="hover:text-accent font-medium block">
+                  <Link to="/booking" search={{ destination: `${t} — India` }} className="hover:text-accent font-medium block">
                     {t}
                   </Link>
                 </li>
